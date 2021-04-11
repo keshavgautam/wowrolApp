@@ -1,0 +1,12 @@
+Case 1:-  If a varint is deleted that it might be used at any where in site .
+          so it will generate a bug.
+
+
+ ISSolved-
+ /*=========================================================*/
+
+
+ Case n:- 
+
+
+ ISSolved-

@@ -1,0 +1,109 @@
+/*--==wow_zoom.css==--*/
+
+ 
+#wow_zoom{
+	display: none;
+	margin-bottom: 20px;
+}
+
+
+#wow_zoom .wow_zoom_thumb{
+	background:url('../imgs/pic/triangle100.gif') center no-repeat;
+	border: none;
+	padding: 6px;
+}
+
+#wow_zoom .wow_zoom_thumb_image{  }
+
+
+#wow_zoom .wow_zoom_small_thumbs li{
+	border: 1px solid #ddd;
+	margin: 10px;
+	padding: 3px;
+}
+
+#wow_zoom ul li.wow_zoom_smallthumb_first{ }
+
+#wow_zoom ul li.wow_zoom_smallthumb_last{ }
+
+#wow_zoom ul li.wow_zoom_smallthumb_active{
+    border: 1px solid #ffd800;
+}
+
+
+#wow_zoom .wow_zoom_zoom_area,
+.wow_zoom_zoom_area{
+	background: white url('../imgs/pic/triangle100.gif') center no-repeat;
+	border: 1px solid #d3dbe2;
+	padding: 6px;
+}
+
+
+#wow_zoom .wow_zoom_magnifier{
+	background: white;
+	border: 1px solid #d3dbe2;
+  
+     cursor: move;
+}
+
+
+#wow_zoom .wow_zoom_icon{
+  background: url('../imgs/pic/shop1.png') no-repeat -247px -340px;
+  background-size: 1000px 1000px;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+	
+}
+
+
+#wow_zoom .wow_zoom_hint{
+	background: url(../images/hint.gif) no-repeat;
+	width: 130px;
+	height: 57px;
+}
+
+
+#wow_zoom .wow_zoom_description{
+	background: white;
+	font-style: italic;
+	margin: 10px;
+	padding: 6px 10px;
+}
+
+
+
+.wow_zoom, .wow_zoom_thumb, .wow_zoom_thumb_image, .wow_zoom_source_image, .wow_zoom_zoom_preview, .wow_zoom_icon, .wow_zoom_hint{ display:none }
+.wow_zoom, .wow_zoom ul, .wow_zoom li, .wow_zoom img, .wow_zoom_hint, .wow_zoom_icon, .wow_zoom_description{ margin:0; padding:0; border:0; list-style:none }
+.wow_zoom, .wow_zoom_magnifier div, .wow_zoom_magnifier div img, .wow_zoom_small_thumbs ul, ul .wow_zoom_small_thumbs li, .wow_zoom_zoom_area div, .wow_zoom_zoom_img{ position:relative }
+.wow_zoom img, .wow_zoom li{ -webkit-user-select:none; -khtml-user-select:none; -moz-user-select:none; -o-user-select:none; user-select:none; -webkit-user-drag:none; -moz-user-drag:none; user-drag:none }
+.wow_zoom, .wow_zoom_small_thumbs li{ float:left }
+.wow_zoom_right{ float:right }
+.wow_zoom li{ position:absolute }
+.wow_zoom img{ vertical-align:bottom; max-width:none }
+.wow_zoom_magnifier{ cursor:default }
+.wow_zoom_magnifier div, .wow_zoom_small_thumbs{ overflow:hidden }
+.wow_zoom_magnifier div img{ display:none }
+.wow_zoom_icon, .wow_zoom_hint{ cursor:default; width:0; height:0; overflow:hidden }
+.wow_zoom_small_thumbs li.vertical{ float:none }
+.wow_zoom_zoom_area{ z-index:996 }
+.wow_zoom_zoom_area div{ overflow:hidden; z-index:997 }
+.wow_zoom_zoom_preview{ position:absolute; z-index:998 }
+.wow_zoom_zoom_img, .wow_zoom_hint{ z-index:999 }
+.wow_zoom{ direction:ltr }
+div.wow_zoom_description{ position:absolute; bottom:0; left:0; z-index:999 }
+div.wow_zoom_description.rtl{ direction:rtl; text-align:right }
+.wow_zoom_small_thumbs > .p,.wow_zoom_small_thumbs > .n {
+position: absolute;
+z-index: 998;
+cursor: pointer;  top: 55px;
+}
+.wow_zoom_small_thumbs > .p {
+  
+  left: 0px;
+}
+.wow_zoom_small_thumbs > .n{
+
+  right: 0px;
+}
+/*--====--*/

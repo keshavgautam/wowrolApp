@@ -1,0 +1,60 @@
+    .mkfeed .image{
+                   display: block;
+                 } 
+            .mkfeed .image >img {
+                   height: auto;
+    font-size: .85714286rem;
+    display: block;
+                 }
+    .w40,.w40 > img{ 
+    width: 40px;
+} 
+.w45,.w45 > img{ 
+    width: 45px;
+}      
+ .w50, .w50 > img{
+    width: 50px;
+}
+ .w60,.w60 > img{ 
+    width: 60px;
+}
+ .w80,.w80 > img{ 
+    width: 80px;
+}
+  .w200,.w200 > img{ 
+    width: 200px;
+}                .mkfeed .image +.content {
+       min-width: 0;
+     display: block;
+    margin-left: 0;
+    padding-left: 1em;
+                 }
+ a {
+  cursor: pointer;
+}
+                 .fs1em {
+                     font-size: 1.28571429em;
+                 }            
+    
+                 .content .extra {
+    margin: .5em 0 0;
+    background: 0 0;
+    padding: 0;
+    color: rgba(0,0,0,.87);
+}
+                 .content .meta {
+    display: inline-block;
+    font-size: 12px;
+    margin: .5em 0 0;
+    padding: 0;
+    color: rgba(0,0,0,.6);
+}
+                 .content .meta>:first-child {
+    margin-left: 0;
+}
+.meta i {
+margin: 0px 2px;
+}
+.wi-au {
+width: 80%;
+}

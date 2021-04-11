@@ -1,0 +1,31 @@
+Options +FollowSymlinks
+
+# Prevent Directoy listing 
+Options -Indexes
+
+# Prevent Direct Access to files
+<FilesMatch "(?i)((\.tpl|\.ini|\.log|(?<!robots)\.txt))">
+ Order deny,allow
+ Deny from all
+</FilesMatch>
+<files .htaccess>
+order allow,deny
+deny from all
+</files>
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^wowrol.com [NC]
+RewriteRule ^(.*)$ http://www.wowrol.com/$1 [L,R=301]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^?]*)$ /index.php?path=$1 [NC,L,QSA]
+
+
+
+
+
+
+
+ErrorDocument 404 /404.php
+ErrorDocument 403 /404.php
+ErrorDocument 400 /404.php
