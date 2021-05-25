@@ -1,11 +1,37 @@
 
 <div class="block m30_0">
 
-<button type="button" class="btn btn-default"  data-junction="popupleft" title="popup on left">popup on left</button>
-  
-<button type="button" class="btn btn-default" data-junction="popuptop" title="popup on top">popup on top</button>
+<div class="tooltip top in" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">asdasd</div></div>
+</div>
+<div class="block m30_0">
+<div class="tooltip right in" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">asdasd</div></div>
+</div>
+<div class="block m30_0">
+  <div class="tooltip left in" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">asdasd</div></div>
+</div>
+<div class="block m30_0">
+  <div class="tooltip bottom in" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner">asdasd</div></div>
+</div>
 
-<button type="button" class="btn btn-default" data-junction="popupbottom"  title="popup on bottom">popup on bottom</button>
+<div class="block m30_0">
 
-<button type="button" class="btn btn-default"  data-junction="popupright"   title="popup on right">popup on right</button>
+
+    <div class="popover top in" role="tooltip"><div class="arrow"></div><h3 class="popover-title">popover-title</h3><div class="popover-content">popover-content</div></div>
+</div>
+<div class="block m30_0">
+
+   <div class="popover  right in" role="tooltip"><div class="arrow"></div><h3 class="popover-title">popover-title</h3><div class="popover-content">popover-content</div></div>
+
+</div>
+<div class="block m30_0">
+
+   <div class="popover  left in" role="tooltip"><div class="arrow"></div><h3 class="popover-title">popover-title</h3><div class="popover-content">popover-content</div></div>
+
+
+</div>
+<div class="block m30_0">
+
+
+ <div class="popover bottom in" role="tooltip"><div class="arrow"></div><h3 class="popover-title">popover-title</h3><div class="popover-content">popover-content</div></div>
+
 </div>

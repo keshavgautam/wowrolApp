@@ -2,38 +2,38 @@
     //ini-set
      ini_set('session.cookie_domain', CookieDomain );
      ini_set('output_handler', 'Off' );
-  ini_set('zlib.output_compression', 'On' );
-  ini_set('zlib.output_handler', "ob_gzhandler");
+ // ini_set('zlib.output_compression', 'On' );
+  //ini_set('zlib.output_handler', "ob_gzhandler");
    ini_set("memory_limit","350M");
 
    
 
     //--header
-    header('Access-Control-Allow-Origin: '.WOWROL);
-    header('Access-Control-Allow-Headers: Origin, X-Requested-With');
-    header('Access-Control-Allow-Methods: GET, POST');
-   header('Cache-Control: no-cache, no-store');
+  header('Access-Control-Allow-Origin: '.WOWROL);
+  header('Access-Control-Allow-Headers: Origin, X-Requested-With');
+  header('Access-Control-Allow-Methods: GET, POST');
+ //  header('Cache-Control: no-cache, no-store');
   /* do not use   header(' Content-Type:text/html;charset=utf-8');
   create  IE bugs */
    
    
-    header('Pragma:no-cache');
-    header('Expires: ' . gmdate( "D, d M Y H:i:s", time() ) . ' GMT');
+  //  header('Pragma:no-cache');
+    //header('Expires: ' . gmdate( "D, d M Y H:i:s", time() ) . ' GMT');
    
   if($GLOBALS['Var_BrowserName']!='Edge'&&$GLOBALS['Var_BrowserName']!='Internet Explorer'&&$GLOBALS['Var_BrowserName']!='Internet Explorer Mobile'){
- header('Content-Encoding:gzip');
-   header('Vary:Accept-Encoding');  
+header('Content-Encoding:gzip');
+  header('Vary:Accept-Encoding');  
  
     }
 
 
 
-    header('X-FRAME-OPTIONS:SAMEORIGIN');
+  //  header('X-FRAME-OPTIONS:SAMEORIGIN');
    
 
  
     $_SERVER['HTTP_ORIGIN']=CookieDomain;
-    header('Origin :'.CookieDomain);
+  //  header('Origin :'.CookieDomain);
     //--
   	// Constants for expressing human-readable intervals
 	// in their respective number of seconds.

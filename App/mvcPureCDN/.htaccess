@@ -4,7 +4,10 @@ Options +FollowSymlinks
 Options -Indexes
 
 <ifModule mod_headers.c>
-    Header set Connection keep-alive
+ 
+Header unset Keep-Alive
+Header unset Connection
+Header unset Last-Modified
 </ifModule>
 
 <IfModule mod_deflate.c>
@@ -29,6 +32,7 @@ BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
 
 # Make sure proxies don't deliver the wrong content
 Header append Vary User-Agent env=!dont-vary
+
 </IfModule>
 
 

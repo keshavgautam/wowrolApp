@@ -1,0 +1,2 @@
+January 19, 2017, 12:12 pm {"file":"","width":250,"height":250,"type":"slider"}
+January 19, 2017, 12:12 pm {"file":"http:\/\/localhost:3325\/assets\/imgs\/pic\/placeholder_loading.png","width":250,"height":250,"type":"slider"}

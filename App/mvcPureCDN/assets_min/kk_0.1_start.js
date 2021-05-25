@@ -1,0 +1,4 @@
+/*
+KK component 
+*/
+;(function(W){

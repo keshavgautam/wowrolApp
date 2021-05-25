@@ -170,7 +170,7 @@ $Info=array('res'=>$pieces[0],
               );
 if(isset($pieces[1])){
     $basedecode=base64_decode($pieces[1]);
- 
+  
     if($basedecode!=FALSE){
     $json_decode=json_decode($basedecode,true);
     if($json_decode!=FALSE&&$json_decode!=NULL){
@@ -207,4 +207,72 @@ function OutputMakejson($x){
    return  json_encode($x, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE);
 
 }
+
+/**
+* @description=>array merge.
+* @param  => [array($array2)=>default,array($array1)=>Saved in databse]
+* @return => [array()]
+*/
+function True_array_merge($array1,$array2){
+    $arguments=array($array1,$array2);
+    $target=$arguments[0];
+    $i= 1;
+    $length = count($arguments);	$deep =$copyIsArray= TRUE;
+     $options=$src=$copy=$clone= array();
+ 
+    
+     for( ; $i<$length ; $i++  ){
+        
+    if ( ( $options = $arguments[ $i ] ) != NULL ) {
+         
+         foreach( $options as  $name=>$value){
+            	$src = (isset($target[ $name ]))?$target[ $name ]:'';
+				$copy =  (isset($options[ $name ]))?$options[ $name ]:'';
+                // Prevent never-ending loop
+				if ( $target === $copy ) {
+					continue;
+				}
+
+	// Recurse if we're merging plain objects or arrays
+				if ( $deep && $copy && (  is_array( $copy ) ||
+					( $copyIsArray = is_array( $copy ) ) ) ) {
+
+					if ( $copyIsArray ) {
+						$copyIsArray = false;
+						$clone = $src &&  is_array( $src ) ? $src : array();
+
+					} else {
+			$clone = $src &&  is_array( $src ) ? $src : array();
+					}
+
+					// Never move original objects, clone them
+					$target[ $name ] =  True_array_merge(  $clone, $copy );
+
+				// Don't bring in undefined values
+				} else if ( isset($copy) ) {
+					$target[ $name ] = $copy;
+				}
+
+
+         }
+          
+
+      }
+
+    }
+
+
+      
+        
+
+ 
+    
+    return $target;
+
+
+} 
+
+
+
+
 ?>

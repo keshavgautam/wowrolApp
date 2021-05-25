@@ -4,14 +4,12 @@
  
 
  $script_out='';
-header('Content-Type: application/x-javascript; charset=UTF-8');
-header('Expires: ' . gmdate( "D, d M Y H:i:s", time() + 31536000 ) . ' GMT');
-header("Cache-Control: public, max-age=31536000");
-header("Timing-Allow-Origin: *");
- if($GLOBALS['Var_BrowserName']!='Edge'&&$GLOBALS['Var_BrowserName']!='Internet Explorer'&&$GLOBALS['Var_BrowserName']!='Internet Explorer Mobile'){
-   header('Content-Encoding:gzip');
-   header('Vary:Accept-Encoding');  
-    }
+header('content-type: text/javascript');
+header('expires: ' . gmdate( "D, d M Y H:i:s", time() + 31536000 ) . ' GMT');
+header("cache-control: public, max-age=31536000");
+header_remove("connection"); 
+header_remove("keep-alive"); 
+ header('last-modified: ' .md5(LastModifiedTime) . ' ');
  /*----====----*/  
 /**
 * @description=>get app  class for component by app id.
@@ -20,23 +18,46 @@ header("Timing-Allow-Origin: *");
 */
 function get_app_class($AppId){
     $AppClass='';
-    if($AppId=="HomePageStore"||$AppId=="store_settings"||$AppId=="dashboard_categories"||$AppId=="dashboard_products"||$AppId=="dashboard_frontpage"||$AppId=="dashboard_menu"||$AppId=="dashboard_orders"||$AppId=="dashboard_shipping"||$AppId=="storestaff"||$AppId=="storestafflogin"||$AppId=="notifications"){
+    if($AppId=="HomePageStore"||$AppId=="store_settings"||$AppId=="dashboard_categories"||$AppId=="dashboard_collections"||$AppId=="dashboard_products"||$AppId=="dashboard_frontpage"||$AppId=="dashboard_menu"||$AppId=="dashboard_orders"||$AppId=="dashboard_shipping"||$AppId=="dashboard_discounts"||$AppId=="storestaff"||$AppId=="storestafflogin"||$AppId=="dashboard_checkins"||$AppId=="dashboard_reports"){
     $AppClass='HomePageStore'; 
-
+  
     }
     if($AppId=="ProfilePageStore"||$AppId=="categoryPageStore"||$AppId=="productPageStore"){
     $AppClass='ProfilePageStore'; 
 
     }
-    if($AppId=="HomePageBuyer"||$AppId==="setting_buyer"||$AppId==="mycheckins"||$AppId=="notifications"){
+
+   if($AppId=="dashboard_advertise"){
+    $AppClass='advertise'; 
+
+    }
+
+    if($AppId=="HomePageBuyer"||$AppId==="setting_buyer"||$AppId==="mycheckins"||$AppId=="requests"||$AppId=="myorders"||$AppId=="messages"||$AppId=="myshops"||$AppId=="browsinghistory"){
     $AppClass='HomePageBuyer'; 
 
     }
-    if($AppId=="ProfilePageBuyer"){
+
+    if($AppId=="HomePageLocationManager"){
+    $AppClass='HomePageLocationManager'; 
+
+    }
+      if($AppId=="HomePageCompany"||$AppId==="dashboard_companycategories"||$AppId==="dashboard_companymenu"||$AppId==="dashboard_brands"||$AppId==="company_settings"){
+    $AppClass='HomePageCompany'; 
+
+    }
+
+
+    if($AppId=="ProfilePageBuyer"||$AppId=="spread"){
     $AppClass='ProfilePageBuyer'; 
 
     }
-      if($AppId=="checkins"){
+
+        if($AppId=="brandPageCompany"){
+    $AppClass='ProfilePageCompany'; 
+
+    }
+
+       if($AppId=="checkins"){
     $AppClass='checkins'; 
 
     }
@@ -51,13 +72,9 @@ function get_app_class($AppId){
 $resInfo=resInfo();
  /*----====----*/  
    $Flaver=$resInfo['wf'];
-     $assets='assets/mob/';
-    switch($Flaver){
-       case 'web':
-    $assets='assets/web/';
-       break;
-    }
-      $assets.='javascript';
+   $assets='assets/mob/javascript';
+ $assetsWeb='assets/web/javascript';
+$assetsCore='assets/core/javascript';
  /*----====----*/  
 
  $res=$resInfo['res'];
@@ -80,66 +97,36 @@ $resInfo=resInfo();
 
      break;
       case 'bootstrap':
-  
-   $script_out.=get_file(ROOT  .$assets.'/vendor/bootstrap.js') ;
-  
-    $script_out.=get_file(ROOT . $assets.'/Controllers/Utility_CheckFeature.js') ;
-   $script_out.=get_file(ROOT . $assets.'/Controllers/Utility_Cookie.js') ;
-   $script_out.=get_file(ROOT . $assets.'/Controllers/Utility_basicfunction.js') ;
-   $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_4_ajax.js') ;
-   $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_5_url.js') ;
-   $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Mouse.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_suggestion.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ListCheckBox.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_drawer.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Touch.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_tab.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_carousel.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_parseTime.js') ;
-   $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_readMore.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_fileUpload.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_masker.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_contentEditable.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ColorSwatches.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Theme.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ToggleView.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ToggleBlock.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_table.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/TemplateSVG.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_relation.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Ratting.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_paging.js') ;
 
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_collapse.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_autosize.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_bottomfixwrap.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Updater.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/TemplateWraper.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/TemplatePagePart.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Form.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_LearnMore.js') ;
+ //$script_out.=get_file(ROOT  .$assets.'/vendor/bootstrap.js') ;
 
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_recaptcha.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Templates/Tem_recaptcha.js') ;
  
 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_Search.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Search.js') ;
+ 
 
-$script_out.=get_file(ROOT . $assets.'/Controllers/setview.js') ;
+
+
+
+
+
+
+
+ 
+$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Landing.js') ;
+$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_Landing.js') ;
+
+$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_PagePart.js') ;
+
+
+
+
 
 
        break;
-    case 'Material':
-    ob_start();
-include(ROOT .'/Material/index.php');
- $script_out.= ob_get_clean();
-
-     
-     break;
+ 
       case 'lang':
-   $lang=$resInfo['wg'];
-   $script_out.=get_file(ROOT  .$assets.'/localization/'.$lang.'.js') ;
+  $lang=$resInfo['wg'];
+     $script_out.=get_file(ROOT  .$assets.'/localization/'.$lang.'.js') ;
 
 
 
@@ -147,18 +134,11 @@ include(ROOT .'/Material/index.php');
 
   case 'main':
   
-   $script_out.=get_file(ROOT  .$assets.'/Components/Main.js') ;
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Handler_formSubmit.js') ;
+ 
 
 
        break;
-     case 'polyfill':
-
- $script_out.=get_file(ROOT . $assets.'/vendor/Polyfill/es5-shim.min.js') ;
-  $script_out.=get_file(ROOT . $assets.'/vendor/Polyfill/sizzle.min.js') ;
-    $script_out.=get_file(ROOT . $assets.'/vendor/Polyfill/Json.js') ;
   
-     break;
    case 'lang':
 
   $lang=$resInfo['wg'];
@@ -168,143 +148,129 @@ include(ROOT .'/Material/index.php');
  case 'ragisterbuyer':
 
   $lang=$resInfo['wg'];
+   $script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_RagisterBuyer.js') ;
      $script_out.=get_file(ROOT  .$assets.'/Modules/ragisterbuyer.js') ;
-     $script_out.=get_file(ROOT  .$assets.'/vendor/date_fill.js') ;
+     $script_out.=get_file(ROOT  .$assetsCore.'/vendor/date_fill.js') ;
  break;
   case 'setting_buyer':
 
-  $lang=$resInfo['wg'];
-     $script_out.=get_file(ROOT  .$assets.'/Modules/setting_buyer.js') ;
-     $script_out.=get_file(ROOT  .$assets.'/vendor/date_fill.js') ;
+ 
+    $script_out.=get_file(ROOT  . $assetsCore.'/common/'.$res.'.js') ;  
+ $script_out.=get_file(ROOT  . $assetsCore.'/Templates/Tem_setting_buyer.js') ;  
+     $script_out.=get_file(ROOT  .$assetsCore.'/vendor/date_fill.js') ;
  break;
   
-  case 'dashboard_products':
+   case 'company_settings':
 
-$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_products.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Components/C9_productInventory_froms.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Components/C9_productSpecification_froms.js') ;  
-$script_out.=get_file(ROOT  .$assets.'/Components/C9_productOptions_froms.js') ;  
+ 
+     $script_out.=get_file(ROOT  . $assetsCore.'/common/'.$res.'.js') ;  
+     $script_out.=get_file(ROOT  . $assetsCore.'/Templates/Tem_company_settings.js') ;  
+  
  break;
+   case 'store_settings':
 
-  case 'dashboard_menu':
-$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_menu.js') ;
-
-$script_out.=get_file(ROOT . $assets.'/vendor/jquery/jquery-ui.js') ;
-$script_out.=get_file(ROOT . $assets.'/vendor/jquery/jquery.ui.touch-punch.js') ;
-$script_out.=get_file(ROOT . $assets.'/vendor/jquery/jquery.mjs.nestedSortable.js') ;
-
+ 
+    $script_out.=get_file(ROOT  . $assetsCore.'/common/'.$res.'.js') ;  
+ $script_out.=get_file(ROOT  . $assetsCore.'/Templates/Tem_store_settings.js') ;  
 
  break;
-
    case 'categoryPageStore':
 
 
-$script_out.=get_file(ROOT . $assets.'/vendor/jquery/jquery-ui.js') ;
-$script_out.=get_file(ROOT . $assets.'/vendor/jquery/jquery.ui.touch-punch.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_StoreBrowsing.js') ;
+$script_out.=get_file(ROOT . $assetsCore.'/vendor/jquery/jquery-ui.js') ;
+$script_out.=get_file(ROOT . $assetsCore.'/vendor/jquery/jquery.ui.touch-punch.js') ;
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CategoryListing.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CategoryListing.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_filter.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_filter.js') ;
 $script_out.=get_file(ROOT  .$assets.'/Modules/categoryPageStore.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_CategoryListing.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_CategoryListing.js') ;
  break;
     case 'productPageStore':
 
 
 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_StoreBrowsing.js') ;
+
+$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ZoomMobile.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread.js') ;
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_ProdcutListing.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProdcutListing.js') ;
 $script_out.=get_file(ROOT  .$assets.'/Modules/productPageStore.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread.js') ;
-
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_ProdcutListing.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ProdcutListing.js') ;
-
  break;
 
  case 'checkins':
 
 
-$script_out.=get_file(ROOT . $assets.'/vendor/jquery/jquery-ui.js') ;
-$script_out.=get_file(ROOT . $assets.'/vendor/jquery/jquery.ui.touch-punch.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Modules/categoryPageStore.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_StoreBrowsing.js') ;
+$script_out.=get_file(ROOT . $assetsCore.'/vendor/jquery/jquery-ui.js') ;
+$script_out.=get_file(ROOT . $assetsCore.'/vendor/jquery/jquery.ui.touch-punch.js') ;
 
 
 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Utility_CheckInChats.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Tem_CheckInChats.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Utility_CheckInStoreBrowser.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Tem_CheckInStoreBrowser.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Utility_CheckInShortList.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Tem_CheckInShortList.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Utility_CheckInSuggestion.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Tem_CheckInSuggestion.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Utility_CheckInCart.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Tem_CheckInCart.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Utility_CheckInOrder.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Tem_CheckInOrder.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Utility_CheckInMembers.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Tem_CheckInMembers.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Utility_CheckInCheckout.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/CheckIn/Tem_CheckInCheckout.js') ;
 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_StoreCheckIn.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Tem_CheckIns.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CategoryListing.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CategoryListing.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_filter.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_filter.js') ;
 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInMembers.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInMembers.js');  
 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_CategoryListing.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_CategoryListing.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_ProdcutListing.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ProdcutListing.js') ;
+$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ZoomMobile.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread.js') ;
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_ProdcutListing.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProdcutListing.js') ;
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInStoreBrowser.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInStoreBrowser.js') ;
+
+
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_checkins.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_checkins.js') ; 
+
 $script_out.=get_file(ROOT  .$assets.'/Modules/checkins.js') ;
 
  break;
  case'HomePageBuyer':
  
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread.js') ;  
- $script_out.=get_file(ROOT  .$assets.'/Modules/HomePageBuyer.js') ;
+
+
+   $script_out=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mob_HomePageBuyer');
  break;
  case'HomePageStore':
-  
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Modules/HomePageStore.js') ;
+   $script_out=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mob_HomePageStore');
+
  break;
+
  case'ProfilePageStore':
 
- 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_ViewReaction.js') ; 
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread.js') ;  
+  $script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_DataPanal.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread.js') ;  
  $script_out.=get_file(ROOT  .$assets.'/Modules/ProfilePageStore.js') ;
  break;
   case'ProfilePageBuyer':
- 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_comment.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread_ViewReaction.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread_ViewReaction.js') ; 
-  $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_spread.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread.js') ;  
+ $script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_DataPanal.js') ;  
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread.js') ;  
  $script_out.=get_file(ROOT  .$assets.'/Modules/ProfilePageBuyer.js') ;
  break;
   case'mycheckins':
@@ -312,93 +278,366 @@ $script_out.=get_file(ROOT  .$assets.'/Templates/Tem_spread.js') ;
 $script_out.=get_file(ROOT  .$assets.'/Templates/Tem_mycheckins.js') ;   
  $script_out.=get_file(ROOT  .$assets.'/Modules/mycheckins.js') ;
  break;
-   case'notifications':
- $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_Notification.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_Notification.js') ;   
- $script_out.=get_file(ROOT  .$assets.'/Modules/notifications.js') ;
+  case'myorders':
+ $script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_myorders.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_myorders.js') ;   
+ $script_out.=get_file(ROOT  .$assetsCore.'/common/myorders.js') ;
  break;
- case'dashboard_orders':
+  case'myshops':
+ $script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_myshops.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_myshops.js') ;   
+ $script_out.=get_file(ROOT  .$assetsCore.'/common/myshops.js') ;
+ break;
+  case'requests':
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C0_start.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_storehomeheader.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_buyerhomeheader.js') ; 
+
+ $script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_FreindRequest.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_FreindRequest.js') ;   
+ $script_out.=get_file(ROOT  .$assetsCore.'/common/requests.js') ;
+ $script_out.= get_file(ROOT  .$assets. '/Controllers/backinit.js');
+ break;
+   case'notifications':
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C0_start.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_storehomeheader.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_buyerhomeheader.js') ; 
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_Notification.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_Notification.js') ;   
+ $script_out.=get_file(ROOT  .$assetsCore.'/common/notifications.js');
+ $script_out.=get_file(ROOT  .$assetsCore.'/Components/C5_SearchDrawer.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C2_card.js') ; 
+ $script_out.= get_file(ROOT  .$assets. '/Controllers/backinit.js');
+ break;
+ case'dashboard_orders1':
 $script_out.=get_file(ROOT  .$assets.'/vendor/date_fill.js') ;
 $script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_OrdeDashBoard.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_OrdeDashBoard.js') ; 
+$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_OrdeDashBoard.js') ;
+$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_OrderStatusUpdate.js') ; 
+$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_OrderStatusUpdate.js') ; 
+
+ 
 $script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_orders.js') ;
  break;
  case'dashboard_frontpage':
 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_DashboardFrontPage.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_DashboardFrontPage.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_frontpage.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_frontpage.js') ; 
 $script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_frontpage.js') ;
  break;
+  case'dashboard_shipping':
+  $script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_DataPanal.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_shipping.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_shipping.js') ; 
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_shipping.js') ;
+ break;
+  case'dashboard_checkins':
 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_checkins.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_checkins.js') ; 
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_checkins.js') ;
+ break;
+   case 'dashboard_products':
+
+$script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('dashboard_products');
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_products.js') ;
+break;
+   case 'dashboard_collections':
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_collections.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_collections.js') ; 
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_collections.js') ;
+
+
+break;
+   case 'dashboard_categories':
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_categories.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_categories.js') ; 
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_categories.js') ;
+
+
+break;
+   case 'dashboard_discounts':
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_discounts.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_discounts.js') ; 
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_discounts.js') ;
+
+
+break;
+
+  case 'dashboard_menu':
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_menu.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_menu.js') ; 
+
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_menu.js') ;
+
+$script_out.=get_file(ROOT . $assetsCore.'/vendor/jquery/jquery-ui.js') ;
+$script_out.=get_file(ROOT . $assetsCore.'/vendor/jquery/jquery.ui.touch-punch.js') ;
+$script_out.=get_file(ROOT . $assetsCore.'/vendor/jquery/jquery.mjs.nestedSortable.js') ;
+
+
+ break;
+  case 'dashboard_orders':
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_orders.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_orders.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_filter.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_filter.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_OrderStatusUpdate.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_OrderStatusUpdate.js') ; 
+
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_orders.js') ;
+ break;
+ case 'dashboard_reports':
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_dashboard_reports.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_dashboard_reports.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_filter.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_filter.js') ; 
+$script_out.=get_file(ROOT  .$assets.'/Modules/dashboard_reports.js') ;
+
+
+break;
+
+case'forget_password':
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_forget_password.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_forget_password.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/common/forget_password.js') ;
+break;
+
+case'spread':
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_comment.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread_ViewReaction.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_spread.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_spread.js') ;  
+$script_out.=get_file(ROOT  .$assets.'/Modules/spread.js') ;
+break;
+case'enter':
+
+$script_out.=get_file(ROOT  . $assetsCore.'/Controllers/Utility_SignInGoogle.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/common/enter.js') ;
+$script_out.=get_file(ROOT  .$assets.'/Modules/enter.js') ;
+break;
+case'mobile_enter':
+$script_out=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mobile_enter');
+
+break;
+
+case'messages':
+
+
+$script_out.=get_file(ROOT  .$assets.'/Modules/messages.js') ;
+break;
+
+case'ragisterstore':
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_RagisterStore.js') ;
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_RagisterStore.js') ;
+$script_out.=get_file(ROOT  .$assets.'/Modules/ragisterstore.js') ;
+break;
+
+case'market':
+
+
+
+
+$script_out=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('market');
+
+break;
+
+
+case 'browsinghistory':
+
+$script_out=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('browsinghistory');
+
+break;
+case 'registerlocationmanager':
+
+$script_out=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('registerlocationmanager');
+
+break;
+case 'HomePageLocationManager':
+
+$script_out=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('HomePageLocationManager');
+
+break;
+case 'dashboard_advertise':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('dashboard_advertise');  
+break;
+case 'registercompany':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('registercompany');  
+break;
+
+case 'dashboard_companycategories':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('dashboard_companycategories');  
+break;
+case 'dashboard_brands':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('dashboard_brands');  
+break;
+case 'dashboard_companymenu':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('dashboard_companymenu');  
+break;
+case 'storestaff':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('storestaff');  
+break;
+
+
+case 'Ragister':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('Ragister');  
+break;
+
+case 'Welcomepage':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('Welcomepage');  
+break;
+
+case 'brandPageCompany':
+  $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('brandPageCompany');  
+break;
 
    default:
-   $script_out.=get_file(ROOT  .$assets.'/Modules/'.$res.'.js') ;
+ //getiing any common file exits if 
+if (file_exists(ROOT  . $assetsCore.'/common/'.$res.'.js')) {
+     $script_out.=get_file(ROOT  . $assetsCore.'/common/'.$res.'.js') ;  
+}else{
+$script_out.=get_file(ROOT  .$assets.'/Modules/'.$res.'.js') ;  
+    
+}
+
   
  }
 
- 
 
 
 
- if (($res != 'loader') && ($res != 'vendor')&& ($res != 'vendorold') && ($res != 'bootstrap')&& ($res != 'main')&& ($res != 'polyfill')&& ($res != 'ServiceWorker')&& ($res != 'lang')) {
 
+
+ $resList=array('loader','vendor','vendorold','bootstrap','main','polyfill','ServiceWorker','lang','notifications','market');
+
+     if (!in_array($res, $resList)) {
       //inner class switch
 
      // getting app  class for component
 
-   $script_out.=get_file(ROOT  .$assets.'/Components/C0_start.js') ;
+   $script_out.=get_file(ROOT  .$assetsCore.'/Components/C0_start.js') ;
     switch(get_app_class($res)){
    case'HomePageBuyer':
 
+ $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mob_class_HomePageBuyer');
 
-$script_out.=get_file(ROOT  .$assets.'/Components/C3_buyerhomeheader.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Components/C1_drawer_HomePageBuyer.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Components/C4_hederAlertBuyer.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Components/C5_SearchDrawer.js') ; 
 
   break; 
   case'HomePageStore':
-
-$script_out.=get_file(ROOT  .$assets.'/Components/C1_drawer_HomePageStore.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Components/C3_storehomeheader.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Components/C4_hederAlertStore.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Components/C5_SearchDrawer.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_dashbord.js') ;        
+ $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mob_class_HomePageStore');  
+ 
   break; 
-  
+   case 'HomePageLocationManager':
+   $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mob_class_HomePageLocationManager');
+  break;
+   case 'HomePageCompany':
+   $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mob_class_HomePageCompany');
+  break;
     case'ProfilePageStore':
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ProfileTabViewer.js');
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_ProfieTabViewer.js');  
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ProfilePage.js'); 
-$script_out.=get_file(ROOT  .$assets.'/Components/C11_ProfileBannerStrip.js'); 
-$script_out.=get_file(ROOT  .$assets.'/Components/C3_profileheader.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Components/C5_SearchDrawer.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_StoreCheckInList.js') ;
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_StoreCheckInList.js') ;      
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfilePage.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfileTabViewer.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_ProfieTabViewer.js');  
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInCart.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInCart.js');  
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInShortList.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInShortList.js');  
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInCheckout.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInCheckout.js');  
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInCheckout.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInCheckout.js');  
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_checkins.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_checkins.js') ; 
+
+
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C11_ProfileBannerStrip.js'); 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C_Store_Slider.js'); 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_profileheader.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C4_hederAlertStore.js') ; 
+
+  
+
+
+ $script_out.=get_file(ROOT  .$assetsCore.'/Components/C10_store-explore-menu.js') ;
   break;  
 
     case'ProfilePageBuyer':
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ProfileTabViewer.js');
-$script_out.=get_file(ROOT  .$assets.'/Templates/Tem_ProfieTabViewer.js');  
-$script_out.=get_file(ROOT  .$assets.'/Controllers/Utility_ProfilePage.js'); 
-$script_out.=get_file(ROOT  .$assets.'/Components/C11_ProfileBannerStrip.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Components/C3_profileheader.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Components/C4_hederAlertBuyer.js') ; 
-$script_out.=get_file(ROOT  .$assets.'/Components/C5_SearchDrawer.js') ; 
-    
-  break;  
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfilePage.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfileTabViewer.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_ProfieTabViewer.js');  
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfilePage.js'); 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C11_ProfileBannerStrip.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C_Store_Slider.js'); 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_profileheader.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C4_hederAlertBuyer.js') ; 
+
+     break;
+   case 'ProfilePageCompany':
+   $script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfilePage.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfileTabViewer.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_ProfieTabViewer.js');  
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfilePage.js'); 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C11_ProfileBannerStrip.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C_Store_Slider.js'); 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_profileheader.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C4_hederAlertBuyer.js') ; 
+    break;
    
-   
+      case'checkins': 
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfilePage.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_ProfileTabViewer.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_ProfieTabViewer.js');  
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInCart.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInCart.js');  
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInCheckout.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInCheckout.js');  
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInSuggestion.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInSuggestion.js');  
 
 
-     
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Controllers/Utility_CheckInShortList.js');
+$script_out.=get_file(ROOT  .$assetsCore.'/Templates/Tem_CheckInShortList.js');  
+
+
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C11_ProfileBannerStrip.js'); 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C_Store_Slider.js'); 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_profileheader.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_storehomeheader.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C3_buyerhomeheader.js') ; 
+$script_out.=get_file(ROOT  .$assetsCore.'/Components/C4_hederAlertStore.js') ; 
+
+
+ 
+
+ $script_out.=get_file(ROOT  .$assetsCore.'/Components/C10_store-explore-menu.js') ;
+
+       break;
+   case 'advertise':
+    $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mob_class_advertise');  
+    break;
+
 
  }
 
  //common to all
-  $script_out.=get_file(ROOT  .$assets.'/Components/C2_card.js') ; 
- $script_out.=get_file(ROOT  .$assets.'/Components/C8_LearnMore.js') ; 
- $script_out.=get_file(ROOT  .$assets.'/Components/C10_store-explore-menu.js') ;
+  $script_out.=$GLOBALS['Var_Minify']->GET_MINFIED_FILE('mob_class_common');
     //inner class switch
 
 
@@ -407,10 +646,13 @@ $script_out.=get_file(ROOT  .$assets.'/Components/C5_SearchDrawer.js') ;
      
 }
    /*----====----*/  
- header("ETag:".'"'.(md5(time()).'"'));
- header('Last-Modified: ' .md5(time()) . ' ');
 
- echo $script_out;
+ob_start();
+ob_start("ob_gzhandler");
+echo $script_out;
+ob_end_flush();
+header('Content-Length: '.ob_get_length());
+ob_end_flush();
  //$minifier = new Minify\JS($script_out);
  //echo $minifier->minify();
 ?>

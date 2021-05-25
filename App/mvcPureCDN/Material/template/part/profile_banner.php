@@ -36,32 +36,65 @@
 </div>
 
 
-<div class="block">
-   <div class="_bdy po-re">
-       
-       <div class=" btn-cluster " role="group">
-             <div class="rbtn _fbtn btn-xs no-p-l no-p-r no-p-t no-p-b no-border"> <div class="_ct " data-ct="2_r" data-ct_state="y">
-     <div class="y fade collapse in" data-cty="2_r"> 
-         <div class="btn-cluster" role="group">
-         <button type="button " class="rbtn btn-xs dropdown-toggle _fbtn " data-toggle="dropdown" aria-expanded="false"> Friends <span class="caret"></span> </button> 
-        <ul class="dropdown-menu fs12" role="menu"> <li><a href="javascript:void(0);" data-cttoggle="2_r" data-user="{&quot;po_id&quot;:&quot;0WnAEcGNXnX20000000000000000000&quot;,&quot;index_id&quot;:&quot;15&quot;}" onclick="_lib1.two_wr(this,1)">Unfriend</a></li>
-       </ul> 
-    </div>
-          </div>
-     <div class="n fade collapse " data-ctn="2_r"> 
-    <div class="btn-cluster" role="group">
-              <button type="button" class="rbtn btn-xs _fbtn " data-cttoggle="2_r" data-user="{&quot;po_id&quot;:&quot;0WnAEcGNXnX20000000000000000000&quot;,&quot;index_id&quot;:&quot;15&quot;}"> Processing  </button> 
-         </div>
-    
-     </div>
-     </div></div>
-       <div class="rbtn _fbtn btn-xs no-p-l no-p-r no-p-t no-p-b no-border"> 
-            <div class="_ct " data-ct="2_r" data-ct_state="y"> <div class="y fade collapse in" data-cty="2_r">  <div class="btn-cluster" role="group"> <button type="button " class="rbtn btn-xs dropdown-toggle _fbtn tt-c" data-toggle="dropdown" aria-expanded="false"> following<span class="caret"></span> </button> <ul class="dropdown-menu fs12 tt-c" role="menu"> <li><a href="javascript:void(0);" data-cttoggle="2_r" data-user="{&quot;po_id&quot;:&quot;0WnAEcGNXnX20000000000000000000&quot;,&quot;index_id&quot;:&quot;15&quot;}" onclick="_lib1.one_wr(this,2)">unfollow</a></li> </ul> </div> </div> <div class="n fade collapse " data-ctn="2_r"><div class="btn-cluster" role="group"> <button type="button" class="rbtn btn-xs _fbtn tt-c" data-cttoggle="2_r" data-user="{&quot;po_id&quot;:&quot;0WnAEcGNXnX20000000000000000000&quot;,&quot;index_id&quot;:&quot;15&quot;}" onclick="_lib1.one_wr(this,3)">follow</button> </div></div> 
-       </div>
-       </div>
-                </div>
-   
-   <button class="rbtn btn-xs _fbtn ">Send Message</button>
-   </div>
+<div class="w6 col6 m_b10">
+	<div class=" btn-group " role="group">
+		<div class="btn _fbtn btn-xs no-p-l no-p-r no-p-t no-p-b no-border">
+			<div class="block ">
+				<div class="block  ">
+					<div class="btn-group" role="group">
+						<button type="button " class="btn truncate  dropdown-toggle _fbtn " aria-expanded="false"> Friends <span class="caret"></span> </button>  
+						<div class="po-ab hide" data-block="menu" style="top: 27px; left: 0px; width: 150px; z-index: 1060;">
+							<ul class="dropdown-menu">
+								<li><a href="javascript:void(0);">Unfriend</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="block  " style="display:none;">
+					<div class="btn-group" role="group"> <button type="button" class="btn truncate  _fbtn ">  Processing  </button> </div>
+				</div>
+			</div>
+		</div>
+		<div class="btn _fbtn btn-xs no-p-l no-p-r no-p-t no-p-b no-border">
+			<div class="block ">
+				<div class="block  ">
+					<div class="btn-group" role="group">
+						<button type="button " class="btn truncate  dropdown-toggle _fbtn " aria-expanded="false"> Followed <span class="caret"></span> </button>  
+						<div class="hide po-ab" data-block="menu">
+							<ul class="dropdown-menu">
+								<li><a href="javascript:void(0);">Unfollow</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="block  " style="display:none;">
+					<div class="btn-group" role="group"> <button type="button" class="btn truncate  _fbtn ">Follow</button> </div>
+				</div>
+			</div>
+		</div>
+        	</div>
+</div>
+<div class="w6 col6 m_b10">
+	<div class=" btn-group " role="group">
+        <div class="btn _fbtn btn-xs no-p-l no-p-r no-p-t no-p-b no-border">
+			<div class="btn-group" role="group">
+						<button type="button " class="btn truncate  dropdown-toggle _fbtn " aria-expanded="false"> Message </button>  
+						
+					</div>
+		</div>
 
+        <div class="btn _fbtn btn-xs no-p-l no-p-r no-p-t no-p-b no-border">
+			<div class="block ">
+				<div class="block  ">
+					<div class="btn-group" role="group">
+						<button type="button " class="btn truncate  dropdown-toggle _fbtn " aria-expanded="false">Go On shopping </button>  
+						
+					</div>
+				</div>
+				<div class="block  " style="display:none;">
+					<div class="btn-group" role="group"> <button type="button" class="btn truncate  _fbtn ">Follow</button> </div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -6,6 +6,13 @@ spread Card
     <div class="block  m30_0">
 
  <div class="block bg_0 bs-0  ">
+      <!--activty header-->
+  <div class="block _Bdy bg_6">
+  asdasd
+  
+  
+  </div>
+
      <!-- header-->
      <div class="block _Bdy">
 <div class="w10">

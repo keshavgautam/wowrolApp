@@ -3,7 +3,7 @@
 <div class="block _bdy fw-b">
 screen 1
 </div>
-    <div class="block  m30_0">
+ <div class="block  m30_0">
 
  <div class="block bg_0">
  <div class="left">
@@ -59,5 +59,53 @@ Refine Your Results
 
 </div>
 
+
+</div>
+<div class="block  m30_0"></div>
+
+
+<div class="block">
+    <!--==-->
+<div class="block ov-aux bg_0 ">
+<div class="block   td-n b_gbl">
+      <div class="block ul ul-menu cl_tagsort">
+         <div class="li tt-u" style=" padding: 3px 5px;"> <label class="m0">Filters by -</label> </div>
+         <div class="li "><span class="label "><span class="span">asd456456</span> <span class=" span">34534545 <i class="sclose" data-rf="[&quot;asd456456&quot;,&quot;34534545&quot;]"></i></span></span> </div>
+         <div class="li "><span class="label "><span class="span">asd456456</span> <span class=" span">34534545 <i class="sclose" data-rf="[&quot;asd456456&quot;,&quot;34534545&quot;]"></i></span></span> </div>
+         <div class="li "><span class="label "><span class="span">asd456456</span> <span class=" span">34534545 <i class="sclose" data-rf="[&quot;asd456456&quot;,&quot;34534545&quot;]"></i></span></span> </div>
+              <div class="li "><span class="label "><span class="span">asd456456</span> <span class=" span">34534545 <i class="sclose" data-rf="[&quot;asd456456&quot;,&quot;34534545&quot;]"></i></span></span> </div>
+              <div class="li "><span class="label "><span class="span">asd456456</span> <span class=" span">34534545 <i class="sclose" data-rf="[&quot;asd456456&quot;,&quot;34534545&quot;]"></i></span></span> </div>
+              <div class="li "><span class="label "><span class="span">asd456456</span> <span class=" span">34534545 <i class="sclose" data-rf="[&quot;asd456456&quot;,&quot;34534545&quot;]"></i></span></span> </div>
+      </div>
+   </div>
+
+</div>
+        <!--==-->
+
+        <!--==-->
+<div class="block">
+    <div class="w4" >
+<div class="block ul " >
+    <div class="block header-cell  bg_5  fg_4 ff_5 bs-1">Filter NAme</div>
+    <div class="block header-cell  bg_7  fg_4 ff_5 bs-1">Filter NAme</div>
+    <div class="block header-cell  bg_7 fg_4 ff_5 bs-1">Filter NAme</div>
+    <div class="block header-cell  bg_7  fg_4 ff_5 bs-1">Filter NAme</div>
+</div>
+
+ 
+    </div>
+    <div class="w8" >
+    <div class="block   _bdy bg_0 bs-1" >
+<div class="block ul cl_f-l ">
+      <div class="block li "> <label class="checkbox"><input type="checkbox" name="filterli" value="0"><span class="checkbox__label fs11">To be shipped</span><i class="badge ">2</i><span class="checkbox__focus-helper"></span><span class="checkbox__box-outline"><span class="checkbox__tick-outline"></span></span></label> </div>
+      <div class="block li "> <label class="checkbox"><input type="checkbox" name="filterli" value="2"><span class="checkbox__label fs11">Pending</span><i class="badge ">1</i><span class="checkbox__focus-helper"></span><span class="checkbox__box-outline"><span class="checkbox__tick-outline"></span></span></label> </div>
+      <div class="block li "> <label class="checkbox"><input type="checkbox" name="filterli" value="3"><span class="checkbox__label fs11">Ready to Collect</span><i class="badge ">2</i><span class="checkbox__focus-helper"></span><span class="checkbox__box-outline"><span class="checkbox__tick-outline"></span></span></label> </div>
+      <div class="block li "> <label class="checkbox"><input type="checkbox" name="filterli" value="13"><span class="checkbox__label fs11">Completed with Good shopping experience</span><i class="badge ">1</i><span class="checkbox__focus-helper"></span><span class="checkbox__box-outline"><span class="checkbox__tick-outline"></span></span></label> </div>
+   </div>
+
+        </div>
+    </div>
+</div>
+        <!--==-->
 
 </div>

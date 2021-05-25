@@ -51,7 +51,7 @@ setting_0:function(){
                                             token:'chips',
                                             placeholder:'pincode'
                                        }; 
-if(x.loaction_id!=''){  token += '<div class="li"><div class="token"> <span>' + x.loaction_name + '</span> <span class="sclose s_tclose" ></span> <input class="tokenh_input" type="hidden"  name="' + suggestion.name + '" value=\'' +JSON.stringify({id:x.loaction_id})  + '\' > </div></div>';
+if(x.location_id!=''){  token += '<div class="li"><div class="token"> <span>' + x.location_name + '</span> <span class="sclose s_tclose" ></span> <input class="tokenh_input" type="hidden"  name="' + suggestion.name + '" value=\'' +JSON.stringify({id:x.location_id})  + '\' > </div></div>';
 token += '<div class="li hidden"><input type="text" name="suggestion" class="form-mold " placeholder="Pincode"  autocomplete="off"   ></div>';
 }else{
    token += '<div class="li "><input type="text" name="suggestion" class="form-mold " placeholder="Pincode"  autocomplete="off"   ></div>'; 
@@ -111,7 +111,7 @@ var ret={error: error,
               AlertError:AlertError //alert
 
   };
-  console.log(ret);
+ 
 
       return ret;
 }    
@@ -217,7 +217,7 @@ var ret={error: error,
               AlertError:AlertError //alert
 
   };
-  console.log(ret);
+ 
 
       return ret;
 }    
@@ -349,7 +349,7 @@ theme:function(){
    
    var Madian=function(x){
      
-   var header= W.T.C.C3_subPageheader({Title:'<a href="" class="left"><h2 class="truncate title" >Settings</h2><i class="badge _gbtn"></i> </a>'});
+   var header= W.T.C.C3_subPageheader({Title:'<a href="'+W.U.URL('store_settings')+'" class="block header-cell fg_6 al-l" ><h2 class="truncate title" >Settings</h2><i class="badge _gbtn"></i> </a>'});
    var footer=W.T.Footer({});;
    
 
@@ -413,62 +413,8 @@ var setting ={
     
 
    
- var Landing=function(x){
-       var ch ='';
-   var  blockFront=Madian(x);
-//--blockFront
-
-var drawer= W.T.wrap(W.T.ActivityHeader({LeftButton:'<a href="javascript:void(0);" data-closebtn="mainpage" >'+W.T.SVG('left',24,'#f1f5fc')+'</a>',
-    Title:'<a href="javascript:void(0);" class="left"><h2 class="truncate title" >Drawer</h2><i class="badge _gbtn"></i> </a>',
-    RightLink:'',
-    dropdown:Array()
-    }), W.T.C.C1_drawer_HomePageStore(x));
-//--drawer
-
-var hederAlert= W.T.wrap(W.T.ActivityHeader({LeftButton:'<a href="javascript:void(0);" data-closebtn="mainpage" >'+W.T.SVG('left',24,'#f1f5fc')+'</a>',
-    Title:'<a href="javascript:void(0);" class="left"><h2 class="truncate title" >Alert</h2><i class="badge _gbtn"></i> </a>',
-    RightLink:'',
-    dropdown:Array()
-    }),W.T.C.C4_hederAlertStore(x));
-//--drawer
-var search= W.T.wrap(W.T.ActivityHeader({LeftButton:'<a href="javascript:void(0);" data-closebtn="mainpage" >'+W.T.SVG('left',24,'#f1f5fc')+'</a>',
-    Title:'<a href="javascript:void(0);" class="left"><h2 class="truncate title" >Search </h2><i class="badge _gbtn"></i> </a>',
-    RightLink:'',
-    dropdown:Array()
-    }), W.T.C.C5_SearchDrawer(x));
-
-     //--learn more
-var learnMore=  W.U.LearnMorewrap;
-
-
-
-
-
-
-
-
-
-
-
-//--search
-var blockList=[blockFront,drawer,hederAlert,search,learnMore];
-var blockName=["blockFront","drawer","hederAlert","search","learnMore"];
-var setting ={
-    name:'mainpage',
-    target:0,
-    page:true,
-    minheight:'auto'
-};
-    ch+=   W.T.ToggleBlock(blockList, blockName,setting);
-       return ch;
-  
-   }
-
-     W.M[W.A.page.AppId]=  {
-         m:function(x){
-             return W.T.Pane(Landing(x));
-         }
-
+  W.M[W.A.page.AppId]=  {
+       Madian:Madian
      };
    
 

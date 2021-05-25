@@ -1,9 +1,9 @@
 <?php
- 
- require($_SERVER['DOCUMENT_ROOT']. '/sr-includes/sr-config.php' );
+
+require( __DIR__. '/sr-config.php' );
 
 
-  require(TEMPLATE. '/app.php' );
+require(TEMPLATE. '/app.php' );
+ //print_r(TEMPLATE);
 
-
-?> 
+?>

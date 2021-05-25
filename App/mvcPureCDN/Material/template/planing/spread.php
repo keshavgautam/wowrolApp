@@ -22,6 +22,10 @@ spread_perpose =>[00=> buyer entity spread,
                   01=> store entity spread
                   10=> store category
                   11=> store product
+                  12=> store feedback
+                  13=> friendship spread
+                  21=> Company category,
+                  22=> Company Brand
                    ]
 </pre>
 

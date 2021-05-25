@@ -29,8 +29,33 @@
 
 
          </div>
-        
-    <div class="block  m30_0">
+      <div class=" block m30_0">
+
+         
+<!-- Standard button -->
+<button type="button" class="btn btn-default bs-5">Default</button>
+
+<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+<button type="button" class="btn btn-primary bs-5">Primary</button>
+
+<!-- Indicates a successful or positive action -->
+<button type="button" class="btn btn-success bs-5">Success</button>
+
+<!-- Contextual button for informational alert messages -->
+<button type="button" class="btn btn-info bs-5">Info</button>
+
+<!-- Indicates caution should be taken with this action -->
+<button type="button" class="btn btn-warning bs-5">Warning</button>
+
+<!-- Indicates a dangerous or potentially negative action -->
+<button type="button" class="btn btn-danger bs-5">Danger</button>
+
+<!-- Deemphasize a button by making it look like a link while maintaining button behavior -->
+<button type="button" class="btn btn-link bs-5">Link</button>
+
+
+         </div>  
+    <div class="block  m30_0 ">
          
          
   <button type="button" class="btn hitbtn ">hitbtn</button>
@@ -40,7 +65,24 @@
     <button type="button" class="btn _cbtn ">_cbtn </button>      
       <button type="button" class="btn _dbtn ">_dbtn</button>         
         <button type="button" class="btn _ebtn ">_ebtn</button>
-                    <button type="button" class="btn _fbtn ">_fbtn</button>           
+                    <button type="button" class="btn _fbtn ">_fbtn</button>  
+          
+                 
+</div>
+        <div class="block  m30_0 bg_0 _bdy">
+         
+
+             <button type="button" class=" flatbtn ">flatbtn</button>      
+             
+             <button type="button" class=" flatbtn fg_8">flatbtn fg_8</button> 
+             <button type="button" class=" flatbtn fg_7">flatbtn fg_7</button>   
+
+     <button type="button" class=" flatbtn fg_2">flatbtn fg_2</button>  
+    <button type="button" class=" flatbtn fg_1">flatbtn fg_1</button>  
+
+
+         
+                  
 </div>
     <div class="block  m30_0">
          

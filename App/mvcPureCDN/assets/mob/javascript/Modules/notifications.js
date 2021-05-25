@@ -6,22 +6,19 @@
 
    
    var Madian=function(x){
-       var ch=''; var URL=W.U.URL;
- var header =W.T.ActivityHeader({LeftButton:'<a href="'+URL('')+'"  >'+W.T.SVG('home',24,'#f1f5fc')+'</a>',
-    Title:'<a href="'+URL('notifications')+'" class="left"><h2 class="truncate" >notifications</h2><i class="badge _gbtn"></i> </a>',
-    RightLink:'',
-    dropdown:Array()
-    });
+       var ch='', URL=W.U.URL,
+       header= '',
+       footer=W.T.Footer({});;
 
-
-      var footer=W.T.Footer({});;
+   
+    var header= W.T.C.C3_subPageheader({Title: '<a href="'+W.U.URL('notifications')+'"  class="block header-cell fg_6 al-l"><h2 class=" title" >notifications</h2><i class="badge _gbtn"></i> </a>'});
        //--EntityStrip datab
 
      
  //-->>   
   
 ch+='<div  data-nodeid="walkway" class="block " style="margin-bottom: 100px;"> </div>';
-   $('[data-appview="' + W.A.page.AppId + '"]').on('pageloaded',function(){
+ W.U.ccbk.Add('pageloaded',function(){
         // Always call inside from function 
  W.U.Notifications.init(W.U.id('walkway'));
     });
@@ -29,7 +26,7 @@ ch+='<div  data-nodeid="walkway" class="block " style="margin-bottom: 100px;"> <
 
  ch+= '<a href="javascript:void(0);" data-learnmore="'+ W.A.page.AppId +'" >Learn More</a>';
 
-        return W.T.wrap(header,ch,footer);
+        return  W.T.wrap(header,ch,footer);
    }
    
     
@@ -38,21 +35,11 @@ ch+='<div  data-nodeid="walkway" class="block " style="margin-bottom: 100px;"> <
     
 
    
- var Landing=function(x){
-       var ch ='';
-   var  blockFront=Madian(x);
-
-    ch+=   blockFront;
-       return ch;
-  
-   }
-
-  W.M.notifications=  {
-         m:function(x){
-             return W.T.Pane(Landing(x));
-         }
-
+   
+  W.M[W.A.page.AppId]=  {
+       Madian:Madian
      };
+   
    
 
 

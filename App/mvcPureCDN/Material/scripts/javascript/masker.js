@@ -30,6 +30,9 @@ masker.push({data:{type:'URL',option:{}}});//URL
 
     
 
+
+   ch+='<div class="block _bdy bg_0 "><div class="block form-piece"><label class="control-lable" ></label><input name="one" class="form-mold" type="text" placeholder="" data-masker="AlphaNum:50:Y:Y"    ><div data-help="one"></div></div></div>'; 
+
   
   ch+='</div>';
 

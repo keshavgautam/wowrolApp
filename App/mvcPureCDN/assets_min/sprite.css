@@ -1,0 +1,218 @@
+/*--==[sprite  icx.png]==--*/
+.stext {
+  font-size: 17px;
+}
+.z7{
+    zoom: 1;
+}
+.s1_0{
+ background: url('/assets/imgs/pic/icx.png')  no-repeat -54px -3px;
+	background-size: 196px 49px;
+	width: 20px;
+	height: 23px;
+ 
+}
+.s1_1{
+  background: url('/assets/imgs/pic/icx.png') no-repeat -76px -2px;
+	background-size: 196px 49px;
+	width: 20px;
+	height: 20px; 
+ 
+}
+.s2_0 {
+	 background: url('/assets/imgs/pic/icx.png')  no-repeat -124px -3px;
+	background-size: 196px 49px;
+	width: 23px;
+	height: 20px;
+}
+.s2_1  {
+	 background: url('/assets/imgs/pic/icx.png') no-repeat -101px -3px;
+	background-size: 196px 49px;
+	width: 22px;
+	height: 20px;
+
+}
+.s3_0 {
+	 background: url('/assets/imgs/pic/icx.png')no-repeat -151px -5px;
+  background-size: 196px 49px;
+  width: 21px;
+  height: 21px;
+}
+.s3_1  {
+	 background: url('/assets/imgs/pic/icx.png')no-repeat -173px -5px;
+	background-size: 196px 49px;
+	width: 21px;
+	height: 21px;
+}
+.s4 {
+	  background: url('/assets/imgs/pic/icx.png')no-repeat -140px -27px;
+	background-size: 196px 49px;
+	width: 23px;
+	height: 21px;
+}
+
+.s5  {
+	 background: url('/assets/imgs/pic/icx.png')no-repeat -164px -27px;
+	background-size: 196px 49px;
+	width: 20px;
+	height: 20px;
+}
+
+/*-----------------*/
+/*--==[sprite  icx_70.png]==--*/
+
+.icx1_0{
+ background: url('/assets/imgs/pic/icx.png') no-repeat -37px -2px;
+	background-size: 137px 35px;
+	width: 14px;
+	height: 16px;
+ 
+}
+.icx1_1{
+  background: url('/assets/imgs/pic/icx.png')  no-repeat -53px -2px;
+	background-size: 137px 35px;
+	width: 14px;
+	height: 15px;
+ 
+}
+.icx2_0 {
+	 background: url('/assets/imgs/pic/icx.png') no-repeat -87px -2px;
+	background-size: 137px 35px;
+	width: 16px;
+	height: 15px;
+}
+.icx2_1  {
+	 background: url('/assets/imgs/pic/icx.png')  no-repeat -70px -3px;
+	background-size: 137px 35px;
+	width: 16px;
+	height: 14px;
+
+}
+.icx3_0 {
+	 background: url('/assets/imgs/pic/icx.png') no-repeat -121px -4px;
+	background-size: 137px 35px;
+	width: 15px;
+	height: 15px;
+}
+.icx3_1  {
+	 background: url('/assets/imgs/pic/icx.png')no-repeat -105px -4px;
+	background-size: 137px 35px;
+	width: 15px;
+	height: 15px;
+}
+
+.icx4 {
+	  background: url('/assets/imgs/pic/icx.png')no-repeat -98px -19px;
+	background-size: 137px 35px;
+	width: 16px;
+	height: 15px;
+}
+
+.icx5  {
+	 background: url('/assets/imgs/pic/icx.png') no-repeat -115px -19px;
+	background-size: 137px 35px;
+	width: 14px;
+	height: 15px;
+}
+
+/*-----------------*/
+/*--==[logo]==--*/
+._ri1 {
+	background: url('/assets/imgs/pic/big_wowrol.png')no-repeat -6px -10px;
+	background-size: 236px 64px;
+	width: 213px;
+	height: 40px;
+     display: inline-block;
+}
+/*18pt small*/
+._ri2 {
+background: url(/assets/imgs/logo/wowrol_0.png)no-repeat -0px 0px;
+    background-size: 140px 30px;
+    width: 147px;
+    height: 30px;
+    display: inline-block;
+}
+/*18pt big*/
+._ri3 {
+	background: url('/assets/imgs/il/logo-18pt.png')no-repeat -4px -35px;
+	background-size: 250px 150px;
+	width: 196px;
+	height: 40px; display: inline-block;
+}
+/*mobaile logo with a*/
+._ri4 a{
+     display: inline-block;
+    background-repeat: no-repeat;
+    
+    background-size: 124px;
+    background-repeat: no-repeat;
+    width: 120px;
+    height: 30px;
+    text-indent: -2000px;
+    overflow: hidden;
+    position: relative;
+}
+/*logo icon big*/
+._ri5 {
+	background: url('/assets/imgs/logo/wowrol_1.png')no-repeat -0px -0px;
+	background-size: 50px 40px;
+	width: 50px;
+    height: 40px; display: inline-block;
+}
+/*logo icon small*/
+._ri6 {
+	background: url('/assets/imgs/logo/wowrol_1.png')no-repeat -0px -0px;
+    background-size: 30px 20px;
+    width: 30px;
+    height: 20px;
+    display: inline-block;
+}
+/*-----------------*/
+
+/*token close*/
+.sclose {
+	background: url('/assets/imgs/pic/close.png') no-repeat 0 -12px;
+	width: 11px;
+	height: 11px;display: inline-block;background-color: #fff;cursor: pointer;  position: absolute;
+     right: 4px;
+    top: 8px;
+}
+.sclose:hover,.sclose_hover {
+	background: url('/assets/imgs/pic/close.png')no-repeat 0 0px;
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  background-color: #fff;
+}
+/*-----*/
+/*emoji*/
+.emojiicon {
+    width: 24px;
+    height: 24px;
+    background: url('http://vk.com/images/im_smile_cross.png?3') 0px -24px no-repeat;
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+/*-----*/
+
+/*location token close*/
+.lo_lclose {
+  background: url('/assets/imgs/pic/close.png') no-repeat 0 0px;
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+ 
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 10px;
+}
+.lo_lclose:hover,.lo_lclose_hover {
+	background: url('/assets/imgs/pic/close.png')no-repeat 0 0px;
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  background-color: #fff;
+}
+/*-----*/

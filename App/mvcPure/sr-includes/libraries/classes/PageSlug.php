@@ -17,6 +17,7 @@
  public function  Unique_Slug($content_slug='',$content_type='',$content_ID='',$phrase_repeat=TRUE){
       
 $content_slug=$this->sanitize_slug_with_dashes($content_slug);
+
 $original_slug=$content_slug;    
   //--==
     $return=array('status'=>500,
@@ -51,6 +52,11 @@ $original_slug=$content_slug;
       $original_slug=$base_slug;
       $content_slug=$original_slug;
        break; 
+     case 'collection':
+      $base_slug=$original_slug.'-collection';
+      $original_slug=$base_slug;
+      $content_slug=$original_slug;
+       break; 
          //---====---
       case 'tag':
       $base_slug=$original_slug.'-tag';
@@ -75,6 +81,27 @@ $original_slug=$content_slug;
       $original_slug=$base_slug;
       $content_slug=$original_slug;
        break;
+     //---====---
+      case 'LocationManager':
+        $base_slug=$original_slug.'-LM';
+      $original_slug=$base_slug;
+      $content_slug=$original_slug;
+       break;
+    case 'company':
+        $base_slug=$original_slug.'-company';
+      $original_slug=$base_slug;
+      $content_slug=$original_slug;
+       break;
+       case 'company-category':
+      $base_slug=$original_slug.'-company-category';
+      $original_slug=$base_slug;
+      $content_slug=$original_slug;
+       break;
+      case 'brand':
+      $base_slug=$original_slug.'-brand';
+      $original_slug=$base_slug;
+      $content_slug=$original_slug;
+       break;
        default:
        $return['status']=500;
         $return['error_msg']='Content Type is not defined.';
@@ -86,8 +113,9 @@ if($base_slug!=''){
     
   if($check_slug==0){//if unique
    
-    
+ 
    $content_slug=  $this->Save_slug($content_ID,$content_type,$content_slug,$base_slug,$original_slug);
+
      $return['status']=200;
        $return['content_slug']=$content_slug;
     }else{
@@ -179,23 +207,53 @@ public function Slug_information($slug){
         case 'product':
       $product_information=$GLOBALS['Var_StoreDashboard']->RetriveById(array('table'=>'productPage','product_id'=>$slug_information['data']['object_id'])); 
 
-  $slug_information['data']['entity_id']=$product_information[0]['entity_id'];
- $slug_information['objectInfo']= $product_information;       
+  if(is_array($product_information)){
+        if(count($product_information)>0){
+   $slug_information['data']['entity_id']= $product_information[0]['entity_id'];
+   $slug_information['objectInfo']= $product_information;     
+    }else{
+       $slug_information['data']  = $this->DummyErrorSlug();
+    } 
+    }else{
+       $slug_information['data']  = $this->DummyErrorSlug();
+    }     
         break;
         case 'category':
        $product_information=$GLOBALS['Var_StoreDashboard']->RetriveById(array('table'=>'categoriesPage','category_id'=>$slug_information['data']['object_id']));
-    
-  $slug_information['data']['entity_id']= $product_information[0]['entity_id'];
-   $slug_information['objectInfo']= $product_information;    
+    if(is_array($product_information)){
+        if(count($product_information)>0){
+   $slug_information['data']['entity_id']= $product_information[0]['entity_id'];
+   $slug_information['objectInfo']= $product_information;     
+    }else{
+       $slug_information['data']  = $this->DummyErrorSlug();
+    } 
+    }else{
+       $slug_information['data']  = $this->DummyErrorSlug();
+    }
+   
         break;
-        case 'checkins':
-$checkin_id =GET_QueryVars('id','url_chars');
-   if($checkin_id!=''){
-  $checkin_row=$GLOBALS['Var_DBMysqli']->getrow(DB_NAME,'checkins', array('checkIn_id'),array($checkin_id));
+       case 'brand':
+      $product_information=$GLOBALS['Var_Company_Dashboard']->RetriveById(array('table'=>'brand','brand_id'=>$slug_information['data']['object_id'])); 
+
+  if(is_array($product_information)){
+        if(count($product_information)>0){
+   $slug_information['data']['entity_id']= $product_information[0]['entity_id'];
+   $slug_information['objectInfo']= $product_information;     
+    }else{
+       $slug_information['data']  = $this->DummyErrorSlug();
+    } 
+    }else{
+       $slug_information['data']  = $this->DummyErrorSlug();
+    }     
+        break;
+        case 'orderdetails':
+   $order_id =GET_QueryVars('id','url_chars');
+      if( $order_id!=''){
+  $order_row=$GLOBALS['Var_DBMysqli']->getrow(DB_NAME,'orders', array('order_id'),array($order_id));
           
-    if($checkin_row!=NULL){
-     $slug_information['data']['entity_id']= $checkin_row['store_id']; 
-     $slug_information['objectInfo']=  $checkin_row;           
+    if($order_row!=NULL){
+     $slug_information['data']['entity_id']= $order_row['store_entity_id']; 
+     $slug_information['objectInfo']=  $order_row;           
     }else{
        $slug_information['data']  = $this->DummyErrorSlug();
     }
@@ -205,10 +263,32 @@ $checkin_id =GET_QueryVars('id','url_chars');
    }
 
 
+
         break;
-        case 'checkout':
-   
-        break;
+
+
+      case 'spread':
+  $spread_id = GET_QueryVars('id','url_chars');
+  $rtw = GET_QueryVars('rtw','url_chars');
+  $comment_id = GET_QueryVars('cmt','url_chars');
+    if($spread_id!=''){
+ $spread_row=$GLOBALS['Var_DBMysqli']->getrow(DB_NAME,'spread', array('spread_id'),array($spread_id));    
+
+     if($spread_row!=NULL){
+     $slug_information['data']['entity_id']= $spread_row['entity_id']; 
+     $slug_information['objectInfo']= array('spread_row'=> $spread_row,'rtw'=>$rtw,'comment_id'=>$comment_id);           
+    }else{
+       $slug_information['data']  = $this->DummyErrorSlug();
+    }
+
+
+    }else{
+     $slug_information['data']  =  $this->DummyErrorSlug(); 
+   }
+
+    
+     break;
+
         case 'admin_slug':
       $slug_information['data']['entity_id']= $GLOBALS['Var_ActorEntityData']['EntityData']['entity_id'];
         break;

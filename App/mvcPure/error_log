@@ -1,0 +1,7 @@
+[03-Mar-2017 07:18:55 UTC] PHP Notice:  Undefined index: Var_AppProtoType in /home/wowrol/public_html/sr-template/app.php on line 3
+[03-Mar-2017 07:18:55 UTC] PHP Fatal error:  Call to a member function appData() on null in /home/wowrol/public_html/sr-template/app.php on line 3
+[03-Mar-2017 07:18:57 UTC] PHP Notice:  Undefined index: Var_AppProtoType in /home/wowrol/public_html/sr-template/app.php on line 3
+[03-Mar-2017 07:18:57 UTC] PHP Fatal error:  Call to a member function appData() on null in /home/wowrol/public_html/sr-template/app.php on line 3
+[30-Mar-2017 06:33:54 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'LLiMmm5dgkZ4vZ'@'localhost' (using password: YES) in /home/wowrol/public_html/sr-includes/libraries/classes/DBMysqli.php on line 20
+[30-Mar-2017 06:41:39 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'LLiMmm5dgkZ4vZ'@'localhost' (using password: YES) in /home/wowrol/public_html/sr-includes/libraries/classes/DBMysqli.php on line 20
+[30-Mar-2017 07:10:54 UTC] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'LLiMmm5dgkZ4vZ'@'localhost' (using password: YES) in /home/wowrol/public_html/sr-includes/libraries/classes/DBMysqli.php on line 20

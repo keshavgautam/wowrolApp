@@ -4,7 +4,8 @@
 ; (function(W){
    "use strict";
      //--CustomSorting block inner side
- var Status= ['Processing', 'Pending', 'Cancelled', 'Completed', 'Failed', 'Dispatched', 'Ready to Collect'];
+
+  var Status= ['Processing', 'Dispatched', 'Pending', 'Ready to Collect','Cancelled by buyer','Cancelled by store','Delivered','Failed','To be return','To be replace','Cancelled return/replacement',' returned',' replaced','Completed with Good shopping experience','Completed with Bad shopping experience'];
   var Type= ['home delivery', 'self collect', 'inquiry', 'booking'];
 
 function mainf (x){
@@ -98,6 +99,8 @@ return ch;
 
 
 
+
+
  function Layout(){
    var header='<div class="block b_gtl b_grl b_gll _bdy "> <div class="block "> <div class="left"> <h3 style="margin-top: 3px;">Orders</h3> </div><div class="right"><a href="javascript:void(0);" class="btn btn-xs btn-primary" data-filterbtn="orders"  >Filter orders</a></div></div><div class="block "> <p class="block _bdy fg_4 fs-italic fs11">Orders on your store</p></div></div>';
     
@@ -120,8 +123,11 @@ var setting ={
    return W.T.ToggleBlock(blockList, blockName,setting);
      
  }
+
+
+
  var S={
-     information:function(x){
+     information:function(x){  var URL=W.U.URL;
       var d_type = 'Via Home Delivery';
         var p_type = 'via Cash on Delivery';
         if (x.type == 1) { d_type = 'Via Self Collect'; p_type = 'via Cash on Collection'; }
@@ -131,7 +137,7 @@ var total=x.currency+' '+(x.total).toFixed(2);
  moredata.push('<span class="span fg_0">Ordered</span>');
    moredata.push('<div class="block ma-l-4"><span class="fs13">'+W.T.SVG('cart',14,'#1274c0')+' '+total+'  <small>'+p_type+'</small> </span ></div>');
    moredata.push('<div class="block ma-l-4"> <span class="fs13">'+W.T.SVG('Shippping',14,'#1274c0')+' <small> '+d_type+'</small> </span></div>');
-  moredata.push('<div class="block _bdy "> <div class="ul ul-menu"> <div class="li "><a href="http://localhost:1234/dashboard-orders&amp;screen=a0&amp;oid=3&amp;order_type=1">View item details </a></div></div></div>');
+  moredata.push('<div class="block _bdy "> <div class="ul ul-menu"> <div class="li "><a href="'+URL('')+'orderdetails?id='+x.oid+'" role="linkbutton" >View item details </a></div></div></div>');
 
 var ch='<div class="block">'+W.T.C.C2_EntityStrip(x.bESd,{moredata:moredata})+'</div>';  
       return ch;
@@ -140,7 +146,7 @@ var ch='<div class="block">'+W.T.C.C2_EntityStrip(x.bESd,{moredata:moredata})+'<
      status:function(x){
      var choices = [0, 1, 2, 3, 4, 5, 6];
     
-     var ch='<span class="fw-b tt-c">'+Status[x.status]+'</span>&nbsp;&nbsp;&nbsp;<span class=""><a href="javascript:void(0);" data-onorderchange="'+x.oid+'"  ><span>Change</span></a></span>';
+     var ch='<span class="fw-b tt-c">'+Status[x.status]+'</span>&nbsp;&nbsp;&nbsp;<span class=""><a href="javascript:void(0);" data-onorderchangeask="'+x.oid+'"  ><span>Change</span></a></span>';
 
    
 

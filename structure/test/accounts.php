@@ -1,52 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Twitter Emoji (Twemoji)</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-    body {
-      font-family: sans-serif;
-      font-size: 16px;
-      text-align: center;
-    }
-    h1 {
-      font-size: 36px;
-      color: #600;
-    }
-    h1 .emoji {
-      width: 36px;
-      height: 36px;
-      margin-bottom: -8px;
-    }
-    a, a:visited {
-      color: #777;
-    }
-    a .emoji {
-      border: 0;
-      width: 16px;
-      height: 16px;
-      margin-bottom: -2px;
-    }
-    </style>
-  </head>
-  <body>
-    <h1>twem&#x2764;ji</h1>
-    <p>sharing Twitter emoji <a href="2/test/preview.html">everywhere</a></p>
-    <p><strong>Version 2 Is Out!</strong><a href="https://github.com/twitter/twemoji">grab me on GitHub &#x2197;</a></p>
-    <p>
-      <a href="https://twitter.com/intent/tweet?button_hashtag=twemojiparty&text=thank%20you%20Twitter%20for%20the%20emoji" class="twitter-hashtag-button" data-size="large" data-related="twitteross" data-url="http://twitter.github.io/twemoji/">Tweet #twemojiparty</a>
-      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </p>
-    <blockquote class="twitter-tweet" lang="en" align="center"><p>today we are open sourcing our emoji to share with everyone <a href="https://twitter.com/hashtag/twemojiparty?src=hash">#twemojiparty</a> 🎉 😜 👯 🍻 🎈 🎤 🎮 🚀 🌉 ✨ <a href="https://t.co/zkXqMXEkOT">https://t.co/zkXqMXEkOT</a></p>&mdash; Twitter Open Source (@TwitterOSS) <a href="https://twitter.com/TwitterOSS/status/530496382885720064">November 6, 2014</a></blockquote>
-    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-    
-    <p>Code licensed under MIT. Graphics licensed under CC-BY</p>
-    <script src="//twemoji.maxcdn.com/2/twemoji.min.js"></script>
-    <script>
-      // I \u2764 emoji!
-      twemoji.parse(document.body);
-    </script>
-  </body>
-</html>
+
+<?php
+
+
+
+
+ if($isUniqueName||$args['pid']!=0){
+      //--
+   $date_gmt=date_in_timezone("UTC");
+   $ip = preg_replace('#[^0-9.]#', '', getenv('REMOTE_ADDR')); 
+
+
+$keyfeature=array($args['keyfeature_0'],$args['keyfeature_1'],$args['keyfeature_2'],$args['keyfeature_3']);
+$SearchWord=$args['searchword'];
+$VarientName=array($args['varient_1'],$args['varient_2'],$args['varient_3']);
+
+$product_public_data=Makejson(SafeArrayEncode(array('keyfeature'=>$keyfeature)));
+$product_private_data=Makejson(array('has_varient'=>$args['has_varient'],
+                                     'varient_name'=>$VarientName));;
+
+$search_data=create_search_data(array($args['name'],$keyfeature,$SearchWord));
+
+   $productargs=array(
+    'product_id' => $args['pid'],
+	'product_name' => $args['name'],
+	'spread_id' => $args['sid'],
+	'entity_id' => $args['ActorEntityData']['EntityData']['entity_id'],
+    'brand_id' => 0,
+    'description' => $args['description'],
+    'has_varient' => $args['has_varient'],
+    'product_public_data' => $product_public_data,
+    'product_private_data' => $product_private_data,
+    'search_data' => '"'.implode('","',$search_data).'"',
+    'category' =>'"'.implode('","',$args['category']).'"',
+    'date_gmt' => $date_gmt,
+    'ip' =>  $ip,
+	'ActorEntityData' => $args['ActorEntityData']
+    );
+
+   
+   $product_id	= $GLOBALS['Var_StoreDashboard']->RagisterProduct($productargs);
+
+
+  $arr['response']=$GLOBALS['Var_StoreDashboard']->ParseProducts($GLOBALS['Var_StoreDashboard']->RetriveById(array('table'=>'store_products','entity_id'=>$args['ActorEntityData']['EntityData']['entity_id'],'product_id'=>$product_id)));
+
+
+
+  $arr['state']=200;
+ }else{
+     
+      $arr['mistake']['message'][]='This Product name  is used . Try another.'; 
+ }
+
+
+?>

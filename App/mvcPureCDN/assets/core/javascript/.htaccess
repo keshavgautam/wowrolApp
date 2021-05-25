@@ -1,0 +1,10 @@
+Options +FollowSymlinks
+
+# Prevent Directoy listing 
+Options -Indexes
+
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^/]+)$ index.php?path=$1 

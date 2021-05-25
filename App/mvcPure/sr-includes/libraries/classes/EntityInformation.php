@@ -17,6 +17,7 @@
                $this->actoruser=$actoruser;
               $this->frontuser_EntityRow= self::GetEntityRow($this->frontuser);
               $this->actoruser_EntityRow= self::GetEntityRow($this->actoruser);
+         
                 parent::__construct($frontuser,$actoruser);
            }
 
@@ -53,65 +54,8 @@ return   $parseData;
 */
 public function GetEntityRow($EntityId){
 
-    $EntityRow=$GLOBALS['Var_BundlePrototype']->DefaultValue('EntityData');
-    $EntityRow['public_data']= array_merge($GLOBALS['Var_BundlePrototype']->DefaultValue('StorePublic'),$GLOBALS['Var_BundlePrototype']->DefaultValue('BuyerPublic'));
-    $EntityRow['private_data']= array_merge($GLOBALS['Var_BundlePrototype']->DefaultValue('StorePrivate'),$GLOBALS['Var_BundlePrototype']->DefaultValue('BuyerPrivate'));
 
-    if($EntityId!=0){
-           $sql='SELECT DISTINCT *
-FROM '.DB_NAME.'.entity a,'.DB_NAME.'.page_slug b
-WHERE a.entity_id='.$EntityId.'
-AND  CAST(b.object_id As SIGNED) =a.entity_id 
-AND (b.object_type="buyer"||b.object_type="store")
-LIMIT 1
-';
-//-- result query
- 
-  $query = mysqli_query($GLOBALS['Var_conn'],$sql); 
-  if( $query ){
-
-
-  while ($row = mysqli_fetch_array($query, MYSQLI_ASSOC)) {
-  $EntityRow=$row;
-   
-}   
-  } 
-  
-  
- //-->>result query
- 
- //buyer
- if($EntityRow['type']==0){
-  $EntityRow['public_data']= JsonTrueDecode($EntityRow['public_data'],array()) ; 
-  $EntityRow['public_data']=True_array_merge( $GLOBALS['Var_BundlePrototype']->DefaultValue('BuyerPublic'), $EntityRow['public_data']);
-
-  $EntityRow['private_data']= JsonTrueDecode($EntityRow['private_data'],array()) ; 
-  $EntityRow['private_data']=True_array_merge($GLOBALS['Var_BundlePrototype']->DefaultValue('BuyerPrivate'), $EntityRow['private_data']);
- }
- //store
-  if($EntityRow['type']==1){
-  $EntityRow['public_data']= JsonTrueDecode($EntityRow['public_data'],array()) ; 
-
-  $EntityRow['public_data']=True_array_merge( $GLOBALS['Var_BundlePrototype']->DefaultValue('StorePublic'),$EntityRow['public_data']);
-
-  $EntityRow['private_data']= JsonTrueDecode($EntityRow['private_data'],array()) ; 
-
-  $EntityRow['private_data']=True_array_merge($GLOBALS['Var_BundlePrototype']->DefaultValue('StorePrivate'), $EntityRow['private_data']);
-
- }
-
-$EntityRow=$this->ParseEntityRow($EntityRow);
-
-
-
-    }//EntityId!=0
-      
-
- 
-
-
-
- return $EntityRow;
+ return $GLOBALS['Var_Utility']->GetEntityRow($EntityId);
 }
 /**
 * @description=>Parse entity Row.
@@ -119,29 +63,11 @@ $EntityRow=$this->ParseEntityRow($EntityRow);
 * @return => 
 */
 public function ParseEntityRow($EntityRow){
-     //buyer
- if($EntityRow['type']==0&&is_string($EntityRow['public_data'])&&is_string($EntityRow['private_data'])){
-  $EntityRow['public_data']= JsonTrueDecode($EntityRow['public_data'],array()) ; 
-  $EntityRow['public_data']=True_array_merge( $GLOBALS['Var_BundlePrototype']->DefaultValue('BuyerPublic'), $EntityRow['public_data']);
-
-  $EntityRow['private_data']= JsonTrueDecode($EntityRow['private_data'],array()) ; 
-  $EntityRow['private_data']=True_array_merge($GLOBALS['Var_BundlePrototype']->DefaultValue('BuyerPrivate'), $EntityRow['private_data']);
- }
- //store
-  if($EntityRow['type']==1&&is_string($EntityRow['public_data'])&&is_string($EntityRow['private_data'])){
-  $EntityRow['public_data']= JsonTrueDecode($EntityRow['public_data'],array()) ; 
-
-  $EntityRow['public_data']=True_array_merge( $GLOBALS['Var_BundlePrototype']->DefaultValue('StorePublic'),$EntityRow['public_data']);
-
-  $EntityRow['private_data']= JsonTrueDecode($EntityRow['private_data'],array()) ; 
-
-  $EntityRow['private_data']=True_array_merge($GLOBALS['Var_BundlePrototype']->DefaultValue('StorePrivate'), $EntityRow['private_data']);
-
- }
-    
+ 
 
 
- return $EntityRow;
+
+ return $GLOBALS['Var_ViewParse']->ParseEntityRow($EntityRow);
 }
 
 
@@ -153,12 +79,17 @@ public function ParseEntityRow($EntityRow){
 */
 public function GetLoginData($EntityId){
     
-    $sql='SELECT DISTINCT *
-FROM '.DB_NAME.'.accounts a,'.DB_NAME.'.entity b
-WHERE b.entity_id='.$EntityId.'
+
+$sql='SELECT DISTINCT *
+FROM  '.DB_NAME.'.account_login_identity a ,'.DB_NAME.'.accounts b,'.DB_NAME.'.login c,'.DB_NAME.'.entity d
+WHERE d.entity_id='.$EntityId.'
+AND a.account_id=d.account_id
 AND a.account_id=b.account_id
+AND b.login_id=c.login_id
 LIMIT 1
 ';
+
+
  $accountDATA=  $GLOBALS['Var_DBMysqli']->query($sql );
   $LoginData= $accountDATA[0];
     //paring private data
@@ -170,7 +101,11 @@ LIMIT 1
 
 
 }
-
+ /**
+* @description=>Compaire two entity and gives information.
+* @param  => 
+* @return => 
+*/ 
   class DirectEntityRelation extends EntityRelation{
  public $frontuser;//frontuser / profile_owner_entity_id of owner whos profile is viewed.
 

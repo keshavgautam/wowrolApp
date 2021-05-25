@@ -15,13 +15,9 @@
     }
     ch+='</div>';
 
-    var drawer= W.T.wrap(   W.T.Header.wellcome({}),  ch);
-
-       var newView=W.U.Rander('<div class="block" data-appView="getmaterial" style="display:block">'+W.T.Pane(drawer)+'</div>');   
+ 
+              var newView='<div class="block" data-appView="getmaterial" style="display:block">'+W.T.Pane(ch)+'</div>';   
    
 
-
-
-           W.U('#page').html(newView);
-           W.U.resize();
+     W.U.ccbk.Run(W.U.Page,'materialpleaseinsert',newView); 
    })(wowrol);

@@ -3,7 +3,7 @@
 </div>
 
  <!--Median: Start-->
-<div id="median" class="block bg_13">
+<div id="median" class="block ">
 
  <!--MedianContent: Start-->
 

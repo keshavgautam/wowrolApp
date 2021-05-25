@@ -13,19 +13,28 @@
 }
         </style>
 <div class="block">
-         <div class="block">
+         <div class="block" id="result">
 
-             <?php for($i=0;$i<9;$i++){
-     
-     for($r=1;$r<11;$r++){
-      for($p=1;$p<4;$p++){
-         echo ' <div class="w3 bg_'.$i.' p_10 fg_'.$r.' ff_'.$p.' fw-b"> bg_'.$i.'  fg_'.$r.' ff_'.$p.'</div>';
-
- }
- }
+        
+ 
 
 
- }?>
                  
  
 </div></div>
+
+
+<script>
+    var ch = '<div class="block">';
+    for (var i = 0; i < 14; i++) {
+        for (var r = 0; r < 18; r++) {
+            for (var p = 0; p < 14; p++) {
+
+                ch+=' <div class="w3 h50 bg_' + i + ' fg_' + r + ' ff_' + p + ' fw-b"> bg_' + i + '  fg_' + r + ' ff_' + p + '</div>';
+
+            }
+        }
+    }
+    ch += '</div >';
+    wowrol.U.AddDom(document.getElementById('result'),ch , 'append');
+        </script>

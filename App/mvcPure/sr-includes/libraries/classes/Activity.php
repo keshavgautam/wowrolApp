@@ -5,7 +5,10 @@
 
  class Activity{
      
-/** $GLOBALS['Var_Activity']->RagisterMainActivity(array('creater_id' => '0','object_id' => '0','activity_code' => 'wwq')); 
+/**
+
+
+@call $GLOBALS['Var_Activity']->RagisterMainActivity(array('creater_id' => '0','object_id' => '0','activity_code' => 'wwq')); 
 * @description=>RagisterMainActivity.
 * @param  => array('activity_main_id' => '1','creater_id' => '0','object_id' => '0','activity_code' => 'wwq','timestamp' => '2016-05-29 19:18:22')
 );
@@ -15,8 +18,8 @@
 public function RagisterMainActivity($args=array()){
     
     $args['activity_main_id']= $GLOBALS['Var_DBMysqli']->insert(DB_NAME,'activity_main',
-array('creater_id','object_id','activity_code'),
-array($args['creater_id'],$args['object_id'],$args['activity_code']));
+array('creater_id','object_id','activity_code','timestamp'),
+array($args['creater_id'],$args['object_id'],$args['activity_code'],time()));
 return  $args['activity_main_id'];
 
 }
@@ -32,8 +35,8 @@ return  $args['activity_main_id'];
 public function RagisterRefActivity($args=array()){
     
     $args['activity_ref_id']= $GLOBALS['Var_DBMysqli']->insert(DB_NAME,'activity_ref',
-array('creater_id','object_id','activity_code'),
-array($args['creater_id'],$args['object_id'],$args['activity_code']));
+array('creater_id','object_id','activity_code','timestamp'),
+array($args['creater_id'],$args['object_id'],$args['activity_code'],time()));
 
 return   $args['activity_ref_id'];
 
@@ -73,16 +76,22 @@ $report_id= $report=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'reports',array('ob
 
  /**
 * @description=>RagisterMainActivity.
-* @param  => array('spread_activity_id'=>0,'creater_id' => '0','spread_id' => '0','object_id' => '0','activity_code' => 'wwq')
+* @param  => array('spread_activity_id'=>0,'creater_id' => '0','spread_id' => '0','object_id' => '0','activity_code' => 'wwq','object_type'=>$args['object_type'])
 );
 * @return => 
 */
 public function CreateSpreadActivity($args=array()){
-      $num_row=$GLOBALS['Var_DBMysqli']->numrow(DB_NAME,'spread_activity',array('creater_id','object_id','activity_code'),array($args['creater_id'],$args['object_id'],$args['activity_code']));
+      $num_row=$GLOBALS['Var_DBMysqli']->numrow(DB_NAME,'spread_activity',array('creater_id','spread_id','object_id','activity_code'),array($args['creater_id'],$args['spread_id'],$args['object_id'],$args['activity_code']));
  $args['spread_activity_id']=0;
+
+ if(!isset($args['object_type'])){
+     $args['object_type']=NULL;
+ }
+
+
   if($num_row==0){
        
-$args['spread_activity_id']= $report=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'spread_activity',array('creater_id','spread_id','object_id','activity_code'),array($args['creater_id'],$args['spread_id'],$args['object_id'],$args['activity_code']));
+$args['spread_activity_id']= $report=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'spread_activity',array('creater_id','spread_id','object_id','activity_code','timestamp','object_type'),array($args['creater_id'],$args['spread_id'],$args['object_id'],$args['activity_code'],time(),$args['object_type']));
 
   }
 

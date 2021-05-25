@@ -34,7 +34,7 @@
          }
      }, {});
 
-     ch += '<div class="block _bdy">---tabcontent---</div>';
+     ch += '<div class="block _bdy">---showbar---</div>';
      //--------------------
      var tabList = [];
 
@@ -43,7 +43,7 @@
          tabLiClass: '',
          data: {
              name: 'demoListtab2',
-             itemType: 'tabcontent',
+             itemType: 'showbar',
              activeIndex: 0
          }
      };
@@ -53,7 +53,7 @@
      }
 
 
-     // ch+=  W.T.CarouselLayout(tabList,setting);
+     ch+=  W.T.CarouselLayout(tabList,setting);
      ch += '<div class="block _bdy">---slide---</div>';
      //--------------------
      var tabList = [];
@@ -62,7 +62,7 @@
          ulClass: ' bg_0 fg_4',
          tabLiClass: '',
          data: {
-             name: 'demoListtab2',
+             name: 'demoListtab3',
              itemType: 'slide',
              activeIndex: 0
          }

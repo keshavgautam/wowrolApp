@@ -9,27 +9,25 @@
  
 
 
-    var Landing=function(x){
+    var Madian=function(x){
      var ch ='';
-    var header=W.T.Header.wellcome({});
-    var footer='';
-   
     ch+='<div  data-nodeid="securitycheckwalkway" class="block " style="margin-bottom: 100px;"><div id="html_element"></div> </div>';
-   $('[data-appview="' + W.A.page.AppId + '"]').on('pageloaded',function(){
+   $(W.U.Page).on('pageloaded',function(){
         // Always call inside from function 
+       
    W.U.recaptcha.SetPage(W.U.id('securitycheckwalkway'));
     });
+   
+ 
 
-      return W.T.wrap(header,ch,footer);
+      return ch;
   
    }
  
 
- W.M.securitycheck={
-          m:function(x){
-             return W.T.Pane(Landing(x));
-         }
 
+      W.M[W.A.page.AppId]=  {
+       Madian:Madian
      };
 
 })(wowrol);

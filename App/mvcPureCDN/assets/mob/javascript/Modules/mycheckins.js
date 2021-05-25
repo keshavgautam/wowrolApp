@@ -35,7 +35,7 @@ ch+='<div  data-nodeid="mycheckinwalkway" class="block " style="margin-bottom: 1
 //--blockFront
 
 var drawer= W.T.wrap(W.T.ActivityHeader({LeftButton:'<a href="javascript:void(0);" data-closebtn="mainpage" >'+W.T.SVG('left',24,'#f1f5fc')+'</a>',
-    Title:'<a href="javascript:void(0);" class="left"><h2 class="truncate title" >Drawer</h2><i class="badge _gbtn"></i> </a>',
+    Title:'<a href="javascript:void(0);" class="left"><h2 class="truncate title" >text_81</h2><i class="badge _gbtn"></i> </a>',
     RightLink:'',
     dropdown:Array()
     }), W.T.C.drawer_HomePageBuyer(x));

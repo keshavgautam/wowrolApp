@@ -134,7 +134,71 @@ screen 2
 
 
 
+</div></div>
+<div class="block m0_auto  col12 ">
+
+<div class="block _bdy fw-b">
+screen 3
+</div>
+<div class="block  m30_0">
+
+    <div class="block ">
+<div class="block b_gtl bg_0 m_b5">
+<div class="block _bdy "><span class="span"> Order Id</span>&nbsp;&nbsp;&nbsp;<span class="fw-b tt-c">Processing</span></div>
+
+<div class="block _bdy "><span class="span">Current order status</span>&nbsp;&nbsp;&nbsp;<span class="fw-b tt-c">Processing</span></div>
+</div>
+<div class="block bg_0 _B-gray m_b5">
+
+<div class="block _bdy fw-b">Change the status to full fill the order</div>
+
+
+
+<div class="block b_gtl bg_0">
+<div class="block _bdy ">Fulfillment Leval-0<span class="span"><span class="fw-b tt-c">Processing</span>&nbsp;&nbsp;&nbsp;</span></div>
+</div>
+
+<div class="block b_gtl bg_0">
+<div class="block _bdy ">Fulfillment Leval-1<span class="span"><span class="fw-b tt-c">Dispatched</span>&nbsp;&nbsp;&nbsp;</span></div>
 </div>
 
 
+<div class="block b_gtl bg_0">
+<div class="block _bdy ">Fulfillment Leval-2<span class="span"><span class="fw-b tt-c">Completed</span>&nbsp;&nbsp;&nbsp;</span></div>
+</div>
+
+<div class="block b_gtl bg_0">
+<div class="block _bdy ">Fulfillment Leval-3<span class="span"><span class="fw-b tt-c">Returned</span>&nbsp;&nbsp;&nbsp;</span></div>
+</div>
+<div class="block ">
+   <div class="block b_gtl  bg_0">
+      <div class="ul  block">
+         <div class="li al-c _bdy fw-b">Next order status</div>
+         <div class="li ">
+            <ul class="ul ul-menu li_bdy ">
+               <li class="fw-b "><span>Wow</span> </li>
+               <li class="fw-b ">&nbsp; |&nbsp; </li>
+               <li class="fw-b "><a href="javascript:void(0);">Like</a></li>
+               <li class="fw-b ">&nbsp; |&nbsp; </li>
+               <li class="fw-b "><a href="javascript:void(0);">Agree</a></li>
+               <li class="fw-b ">&nbsp; |&nbsp; </li>
+               <li class="fw-b "><a href="javascript:void(0);">FeelSad</a></li>
+               <li class=""></li>
+               <div class="li hide"><input type="hidden" name="fromreaction:0" value="0"></div>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+
+
+
+</div>    
+
+<div class="block m_b10 bg_8 fg_10 ff_3 _B-gray"> <div class="block _bdy">To save permanently this edit ,click save.</div></div>
+
+</div>
+</div>
 </div>

@@ -6,6 +6,7 @@
 
    function __construct($Store_id) {
                $this->Store_id=$Store_id;
+              $this->Store_EntityRow=$GLOBALS['Var_Utility']->GetEntityRow($Store_id);
                                   }  
 
  /**
@@ -18,58 +19,74 @@
 public function GetCheckInInfo(){
    $ActorEntityData=$GLOBALS['Var_ActorEntityData'];
    $CheckIn=$GLOBALS['Var_BundlePrototype']->DefaultValue('storeCheckInData');;
-$CheckIn=$GLOBALS['Var_DBMysqli']->getrow(DB_NAME,'checkins', array('buyer_id','store_id'),array($ActorEntityData['EntityData']['entity_id'],$this->Store_id)); 
+//$CheckIn=$GLOBALS['Var_DBMysqli']->getrow(DB_NAME,'checkins', array('buyer_id','store_id'),array($ActorEntityData['EntityData']['entity_id'],$this->Store_id)); 
 
+$result=$GLOBALS['Var_DBMysqli']->query('SELECT * FROM '.DB_NAME.'.checkins  a , '.DB_NAME.'.conversation  b
+   WHERE a.store_id = '.$this->Store_id.' 
+   AND  a.buyer_id = '.$ActorEntityData['EntityData']['entity_id'].' 
+   AND  a.conversation_id = b.conversation_id 
+    '); 
+ 
+     
+  if((count($result)==0)&&$this->Store_id!=0&&$ActorEntityData['EntityData']['type']!=1){
+    
 
+       $AllRecipient_EntityRow =   $GLOBALS['Var_UtilityCheck']->IsValidObject_M(array('type'=>'EntityRowByArray','entity_id_Array'=>array($ActorEntityData['EntityData']['entity_id'],$this->Store_id)));
 
-  if($CheckIn==NULL&&$this->Store_id!=0&&$ActorEntityData['EntityData']['type']==0){
-    $last_check_time=Makejson(array(time(),time()));
+         if(count( $AllRecipient_EntityRow)>1){
+ $conversation = $GLOBALS['Var_Conversation']->Getconversation($AllRecipient_EntityRow,1);
+
+  
       
-$CheckIn['checkIn_id']=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'checkins', array('buyer_id','store_id','last_check_time'),array($ActorEntityData['EntityData']['entity_id'],$this->Store_id, $last_check_time)); 
+$CheckIn['checkIn_id']=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'checkins', array('buyer_id','store_id','conversation_id'),array($ActorEntityData['EntityData']['entity_id'],$this->Store_id, $conversation['conversation_id'])); 
 
-$CheckIn=$GLOBALS['Var_DBMysqli']->getrow(DB_NAME,'checkins', array('checkIn_id'),array($CheckIn['checkIn_id'])); 
+//updating checkin id
+$update=$GLOBALS['Var_DBMysqli']->update(DB_NAME,'conversation', array('checkIn_id'),array($CheckIn['checkIn_id']), array('conversation_id'),array($conversation['conversation_id'])); 
+
+
+
+$result=$GLOBALS['Var_DBMysqli']->query('SELECT * FROM '.DB_NAME.'.checkins  a , '.DB_NAME.'.conversation  b
+   WHERE a.store_id = '.$this->Store_id.' 
+   AND  a.buyer_id = '.$ActorEntityData['EntityData']['entity_id'].' 
+   AND  a.conversation_id = b.conversation_id 
+    '); 
+    }
+     $CheckIn=$result[0];
+ $NormalToArray =$GLOBALS['Var_Conversation']->ParseConversationRowToNormal($CheckIn);
+ $CheckIn['last_check_time']=$NormalToArray['last_check_time']; 
+ $CheckIn['history_cleared_till']= $NormalToArray['history_cleared_till'];  
+$CheckIn['members']=$NormalToArray['members'];  
+  }else{
+     $CheckIn =$result[0];
   }
 
+ 
+  //
 
+  
   return $CheckIn;
 }
+/*
+@des Well formed data of checkin row
+@call  $storeOutput->GetCheckinRow();
+*/
+public function GetCheckinRow(){
+       $checkIn_row=  $this->GetCheckInInfo();
+  $NormalToArray =$GLOBALS['Var_Conversation']->ParseConversationRowToNormal(  $checkIn_row);
 
+ 
 
+ $checkIn_row['last_check_time']=$NormalToArray['last_check_time']; 
+ $checkIn_row['history_cleared_till']= $NormalToArray['history_cleared_till'];  
+ $checkIn_row['members']=$NormalToArray['members'];  
+
+  return  $checkIn_row;
+}
 
 /*------===Ragister===------*/
 
-/**
-* @description=> Send a checkin message
-* @param  =>
-* @return => 
-*/
-public function SendCheckinTextMessage($args){
-   $args['checkIn_id']=$args['checkIn_row']['checkIn_id'];
-     $args['sender_id']=$args['ActorEntityData']['EntityData']['entity_id'];
 
 
-    $args['message_id']=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'checkinmessages',array('message','recevers_id','checkIn_id','sender_id','time_gmt','time_node'),array($args['message'],$args['recevers_id'],$args['checkIn_id'],$args['sender_id'],$args['dateGMT'],time()));
-
-  return  $args;
-}
-/**
-* @description=> Send a checkin message
-* @param  =>
-* @return => 
-*/
-public function SendCheckinAttechmentMessage($args){
-    //$args bulid in ragistration->CheckInShortListEdit
-     $args['checkIn_id']=$args['checkIn_row']['checkIn_id'];
-     $args['sender_id']=$args['ActorEntityData']['EntityData']['entity_id'];
-   //deleteing if any same type
-    $GLOBALS['Var_DBMysqli']->delete(DB_NAME,'checkinmessages',array('checkIn_id','attachments_id','attachments_type'),array($args['checkIn_id'],$args['attachments_id'],$args['attachments_type']));
-   
-
-      $args['message']='';//by default
-    $args['message_id']=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'checkinmessages',array('message','recevers_id','checkIn_id','sender_id','attachments_id','attachments_type','time_gmt','time_node'),array($args['message'],$args['recevers_id'],$args['checkIn_id'],$args['sender_id'],$args['attachments_id'],$args['attachments_type'],$args['dateGMT'],time()));
-
-  return  $args;
-}
 /**
 * @description=> Edit checkin Suggest Product
 * @param  =>
@@ -84,8 +101,8 @@ public function CartEdit($args){
     
 
   if($update=="updated"&&$args['CareteChatMsg']){//sending message
-      $this->SendCheckinAttechmentMessage($args);
-
+     $args['conversation_row']=$args['checkIn_row'];
+        $GLOBALS['Var_Conversation']->SendCheckinAttechmentMessage($args);
 
   //activity
 $GLOBALS['Var_Activity']->RagisterRefActivity(array('creater_id' =>$args['creater_id'],'object_id' =>$args['object_id'],'activity_code' => '702')); 
@@ -107,30 +124,15 @@ public function ShortListEdit($args){
   $update=$GLOBALS['Var_DBMysqli']->update(DB_NAME,'checkins',array('shortlistedProducts_id'),array($args['shortlistedProducts_id_Str']),array('checkIn_id'),array($args['checkIn_row']['checkIn_id']));
 
  if($update=="updated"&&$args['CareteChatMsg']){//sending message
-      $this->SendCheckinAttechmentMessage($args);
+       $args['conversation_row']=$args['checkIn_row'];
+   $GLOBALS['Var_Conversation']->SendCheckinAttechmentMessage($args);
   }
 
   return $update;
  
    
 }
-/**
-* @description=> 
-* @param  =>
-* @return => 
-*/
-public function MembersEdit($args){
-    
-     // update it
 
-  $update=$GLOBALS['Var_DBMysqli']->update(DB_NAME,'checkins',array('buyers_id'),array($args['buyers_id_Str']),array('checkIn_id'),array($args['checkIn_row']['checkIn_id']));
-
- if($update=="updated"&&$args['CareteChatMsg']){//sending message
-      $this->SendCheckinAttechmentMessage($args);
-  }
-
-  return $update;
-}
 
 /**
 * @description=> Edit checkin Suggest Product
@@ -144,13 +146,25 @@ public function SuggestEdit($args){
   $update=$GLOBALS['Var_DBMysqli']->update(DB_NAME,'checkins',array('suggestedProducts_id'),array($args['suggestedProducts_id_Str']),array('checkIn_id'),array($args['checkIn_row']['checkIn_id']));
 
  if($update=="updated"&&$args['CareteChatMsg']){//sending message
-      $this->SendCheckinAttechmentMessage($args);
+       $args['conversation_row']=$args['checkIn_row'];
+       $GLOBALS['Var_Conversation']->SendCheckinAttechmentMessage($args);
   }
 
   return $update;
  
    
 }
+
+/**
+* @description=> emptycart
+* @param  =>  MakeEmptyCart(array('checkIn_id'=>));
+* @return => 
+*/
+public function MakeEmptyCart($checkIn_id){
+      $update=$GLOBALS['Var_DBMysqli']->update(DB_NAME,'checkins',array('cartVarient_id','cartVarient_data'),array('',''),array('checkIn_id'),array($checkIn_id));
+
+}
+
 /**
 * @description=>RagisterShippingOrder
 * @param  => 
@@ -158,7 +172,7 @@ public function SuggestEdit($args){
 */
  public function RagisterShippingOrder($args){
      
-      $args['order_id']=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'orders',array('buyer_entity_id','store_entity_id','order_type','order_data','order_status','order_time','cartVarient_id','cartVarient_data','shipping_address'),array( $args['buyer_entity_id'],$args['store_entity_id'],$args['order_type'],$args['order_data'],$args['order_status'],$args['dateGMT'],$args['cartVarient_id'],$args['cartVarient_data'],$args['shipping_address']));
+      $args['order_id']=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'orders',array('buyer_entity_id','store_entity_id','order_type','order_data','order_status','order_time','cartVarient_id','cartVarient_data','shipping_address','checkIn_id','timestamp'),array( $args['buyer_entity_id'],$args['store_entity_id'],$args['order_type'],$args['order_data'],$args['order_status'],$args['dateGMT'],$args['cartVarient_id'],$args['cartVarient_data'],$args['shipping_address'],$args['checkIn_row']['checkIn_id'],time()));
 
 //--deleteing cart items and suggestions
 
@@ -166,17 +180,106 @@ public function SuggestEdit($args){
 
 //
 //--ragister order activity
- /*
-$GLOBALS['Var_Activity']->RagisterMainActivity(array('creater_id' =>$args['creater_id'],'object_id' =>$args['object_id'],'activity_code' => '702')); 
-*/
+
+$GLOBALS['Var_Activity']->RagisterMainActivity(array('creater_id' =>$args['buyer_entity_id'],'object_id' => $args['order_id'],'activity_code' => '800')); 
+
 //--==
+//emptying cart
+$this->MakeEmptyCart($args['checkIn_row']['checkIn_id']);
+
 //--sending a email to seller
 
 
   $GLOBALS['Var_ExternalNotification']->Neworder_to_seller($args['email_data']);
 
 
+//--save data for statistics
+ $args['order_statistics']['order_id']= $args['order_id'];
+ $order_statistics= $args['order_statistics'];
+         $GLOBALS['Var_DBMysqli']->insert(DB_NAME,'order_statistics',array('order_id','sub_total','tax','sur_charge','discount','total_weight','total','shipping_charge'),array($args['order_id'], $order_statistics['sub_total'], $order_statistics['tax'], $order_statistics['sur_charge'], $order_statistics['discount'], $order_statistics['total_weight'], $order_statistics['total'], $order_statistics['shipping_charge'] ));
+
+///save for item reference
+  $OptionName=array('order_id','varient_id','product_id');   $OptionValue=array();
+  
+     foreach($args['item_ref_data'] as $data){
+        $OptionValue[]=array($args['order_id'],$data['varient_id'],$data['product_id']);
+     }
+    $GLOBALS['Var_DBMysqli']->bulk_insert(DB_NAME,'order_items_ref',$OptionName,$OptionValue);
+
+
+
+  return $args['order_id'];
  }
+
+ /**
+* @description=>RagisterTraking
+* @param  => 
+* @return => 
+*/
+
+
+public function AddOrderTacking($args){
+  $args['order_tracking_id']=$GLOBALS['Var_DBMysqli']->insert(DB_NAME,'order_tracking',array('order_id','tracking_msg','tracking_type','to_status','update_date_gmt'),array( $args['order_id'],$args['tracking_msg'],$args['tracking_type'],$args['to_status'],$args['dateGMT']));
+  
+  
+  return   $args['order_tracking_id'];
+}
+ /**
+* @description=>UpdateShippingOrderStatus
+* @param  => 
+* @return => 
+*/
+public function UpdateShippingOrderStatus($args){
+  
+
+// upadting order status
+ $update=$GLOBALS['Var_DBMysqli']->update(DB_NAME,'orders',array('order_status'),array($args['nstatus']),array('order_id'),array($args['order_id']));
+$update="updated";
+ if($update=="updated"){//sending message
+      // inserting in traking order
+   $args['order_tracking_id'] = $this-> AddOrderTacking(array(
+    'order_id'=>$args['order_id'],
+    'tracking_msg'=>$args['status_note'],
+    'tracking_type'=>1,//for status update
+    'to_status'=>$args['nstatus'],
+    'dateGMT'=>$args['dateGMT'],
+                   ));
+
+//adding in checkin msg
+$args['conversation_row']=$args['checkIn_row'];
+$args['recevers_id']='"'.implode('","',$args['members']).'"';
+$args['attachments_type']=7;
+$args['attachments_id']=$args['order_tracking_id'];//for status update
+$args['dateGMT']=$args['dateGMT'];
+
+  $GLOBALS['Var_Conversation']->SendCheckinAttechmentMessage($args);
+
+
+// ragisting main activity
+
+$GLOBALS['Var_Activity']->RagisterMainActivity(array('creater_id' =>$args['ActorEntityData']['EntityData']['entity_id'],'object_id' =>$args['order_id'],'activity_code' => '801','object_type' => $args['nstatus'])); 
+
+
+// Sendig external notification 
+//email to buyer
+  $GLOBALS['Var_ExternalNotification']->StatusChange_to_buyer($args['email_data']);
+
+
+
+  }
+
+
+
+ return  $update;
+
+}
+ /**
+* @description=>UpdateShippingOrderStatus
+* @param  => 
+* @return => 
+*/
+
+
 /*------===Check===------*/
 /**
 * @description=> GetCheckInMember
@@ -194,17 +297,9 @@ public function GetCheckInMember($Fields){
 * @return => 
 */
 public function GetEntityRole($Member){
-   $ActorEntityData=$GLOBALS['Var_ActorEntityData'];
- $entity_id=  $ActorEntityData['EntityData']['entity_id'];
- $Role='unvalid';
-   foreach ($Member as $q =>$v){
-       if($entity_id==$v){
-           $Role =$q;
-       }
-   }
 
 
-   return $Role;
+   return  $GLOBALS['Var_ViewParse']->GetEntityRole($Member);
 }
 /**
 * @description=> get the senderrole member rol
@@ -224,57 +319,52 @@ public function GetSenderRole($Member,$sender){
 
    return $Role;
 }
-/**
-* @description=> get the LastchatcheckTime
-* @param  =>
-* @return => 
-*/
-public function LastchatcheckTime($Fields){
-     $members= $this->GetCheckInMember($Fields); 
-      $role=$this->GetEntityRole($members); 
-    $last_check_time=JsonTrueDecode($Fields['last_check_time'],array());
-    $ret=time();
-   if($role!=='unvalid'){
-   $ret=$last_check_time[$role];
 
-   }
-
-   return $ret;
-}
-/**
-* @description=> update Last chat check time
-* @param  =>
-* @return => 
-*/
-public function UpdateLastchatcheckTime($Fields){
-        $members= $this->GetCheckInMember($Fields); 
-      $role=$this->GetEntityRole($members); 
-    $last_check_time=JsonTrueDecode($Fields['last_check_time'],array());
-  
-   if($role!=='unvalid'){
-   $last_check_time[$role]=time();
-    $update=$GLOBALS['Var_DBMysqli']->update(DB_NAME,'checkins',array('last_check_time'),array(Makejson($last_check_time)),array('checkIn_id'),array($Fields['checkIn_id']));
-   }
-
-}
 
 /**
 * @description=> check delivery
 * @param  =>
 * @return => $shipping table row || Null
 */
-public function CheckDelivery($Location_id,$Store_id){
+public function CheckDelivery($Location_id,$Store_id,$storeZoneType){
     $ret=NULL;
+//   'shippingZonetype'=>'0',//0=>national leval ,1 => local
+ //check_response('$storeZoneType => '.$storeZoneType);
+  //check_response('$storeZoneType '.intval($storeZoneType));
     if($Location_id!=''){
-       $selectsql='SELECT * FROM '.DB_NAME.'.store_shipping a 
+        switch(intval($storeZoneType)){
+        case 0:
+
+   $Location_row=$GLOBALS['Var_DBMysqli']->getrow(DB_NAME,'locations',array('location_id'),array($Location_id));
+   //check_response($Location_row);
+   if($Location_row!=NULL&&isset($Location_row['fl_admin_id'])){
+     $selectsql='SELECT * FROM '.DB_NAME.'.store_shipping a 
  WHERE a.entity_id	='.$Store_id.' 
- AND  a.locations	LIKE "%'.$Location_id.'%"  
+ AND  a.locations	LIKE  \'%"'.$Location_row['fl_admin_id'].'"%\' 
+ AND a.shippingZonetype=0
+ LIMIT 1     ';
+     $result=$GLOBALS['Var_DBMysqli']->query($selectsql);
+    
+     if(count($result)>0){
+          $ret=$result[0];
+     }   
+
+}
+        break; 
+        case 1:
+     $selectsql='SELECT * FROM '.DB_NAME.'.store_shipping a 
+ WHERE a.entity_id	='.$Store_id.' 
+ AND  a.locations	LIKE \'%"'.$Location_id.'"%\'
+ AND a.shippingZonetype=1  
  LIMIT 1     ';
      $result=$GLOBALS['Var_DBMysqli']->query($selectsql);;
     
      if(count($result)>0){
           $ret=$result[0];
      }   
+        break;    
+        }
+  
     }
 
 
@@ -330,16 +420,22 @@ $product_varients_data= $GLOBALS['Var_StoreDashboard']->ParseProductVarients($pr
   
     return $VarientData;
 }
+
 /**
 * @description=> CalculateCart
 * @param  =>
 * @return => 
 */
 public function  CalculateCart($OrderVarient_data,$checkIn_parse){
+ $storeAddress=$checkIn_parse['addr'][0];
+    $buyerAddress=$checkIn_parse['addr'][1];
+  $shippingAddress=(isset($buyerAddress[$checkIn_parse['addr_id']]))?$buyerAddress[$checkIn_parse['addr_id']]:$storeAddress;
+
   $total=array(
     'sub_total'=>0.00,
     'tax'=>0.00,
     'sur_charge'=>0.00,
+    'shipping_charge'=>0.00,
     'discount'=>0.00,
     'currency'=>0.00,
     'total_weight'=>0.00,
@@ -348,12 +444,12 @@ public function  CalculateCart($OrderVarient_data,$checkIn_parse){
 $sub_total=0.00;
 $tax=0.00;
 $sur_charge=0.00;
-$shipping_charge=floatval($checkIn_parse['d_sch']);
-$discount=0.00;
+$shipping_charge=floatval($shippingAddress['d_sch']);
+$discount=floatval($checkIn_parse['dData']['total']);
 $currency=0.00;
 $total_weight=0.00;
 
-$shipping_range=json_decode($checkIn_parse['d_ch']);
+$shipping_range=json_decode($shippingAddress['d_ch']);
 //first sub total
 
 foreach($OrderVarient_data as $p=>$q){
@@ -371,11 +467,11 @@ foreach($OrderVarient_data as $p=>$q){
   $sub_total = $sub_total+ floatval($ammount);
 }
 
-if($checkIn_parse['da']==1){//home delivery
+if($shippingAddress['da']==1){//home delivery
      $limit = 0;
    foreach($shipping_range as  $q => $range){
 
-        if($checkIn_parse['d_type']=="0"){ //weight based
+        if($shippingAddress['d_type']=="0"){ //weight based
 
               if ($total_weight <floatval($range[0]) && $total_weight > $limit) {
 
@@ -396,7 +492,7 @@ if($checkIn_parse['da']==1){//home delivery
 
 
               }
-        if($checkIn_parse['d_type']=="1"){ //price based
+        if($shippingAddress['d_type']=="1"){ //price based
             
               if ($sub_total < floatval($range[0]) && $sub_total > $limit) {
 
@@ -427,6 +523,17 @@ if($checkIn_parse['da']==1){//home delivery
  $total['shipping_charge']=$shipping_charge+$sur_charge;
  $total['total']=$sub_total+$shipping_charge;
 }
+
+//-- apply discount shipping iffect
+if($checkIn_parse['dData']['ifs']){
+ $total['shipping_charge']=0.00;
+ $total['total']=$sub_total; 
+}
+//-- apply main discount 
+ $total['total']=floatval( $total['total'])-$discount;
+
+
+ $total['discount']=$discount;
  $total['total_weight']=$total_weight;
  $total['sub_total']=$sub_total;
  $total['currency']=$checkIn_parse['currency'];
@@ -434,6 +541,10 @@ if($checkIn_parse['da']==1){//home delivery
 
 return $total;
 }
+
+
+
+
 /*------===Retrive===------*/
 /**
 * @description=> GetActiveCheckin
@@ -441,83 +552,39 @@ return $total;
 * @return => 
 */
 public function GetActiveCheckinAtStore($args=array()){
-    
+   
 
 
-    $numsql='SELECT COUNT(*) FROM '.DB_NAME.'.checkins a 
- WHERE a.store_id	='.$this->Store_id.' 
- AND  (  a.buyer_id	='.$args['entity_id'].'
-         OR a.buyers_id	LIKE "%'.$args['entity_id'].'%"  
-        )
 
+         
+ $WHERE='
+ b.store_id	='.$this->Store_id.' 
+AND  a.members LIKE \'%"'.$args['entity_id'].'"%\' 
+ AND  a.conversation_id  NOT IN ( SELECT b.conversation_id FROM  '.DB_NAME.'.conversation b
+                                 WHERE   b.is_delete LIKE \'%"'.$args['entity_id'].'"%\' 
+                                 )
+ AND b.conversation_id = a.conversation_id
  ';
-   $total_result=$GLOBALS['Var_DBMysqli']->numquery($numsql);
-   //--paging data
-$paging_data=paging_data($total_result,$args['pagesize'],$args['paged']);
 
 
- $selectsql='SELECT * FROM '.DB_NAME.'.checkins a 
- WHERE  a.store_id	='.$this->Store_id.' 
- AND  (   a.buyer_id	='.$args['entity_id'].'
-         OR a.buyers_id	LIKE "%'.$args['entity_id'].'%"  
-        )
-ORDER BY a.checkInTime_gmt DESC
-
- ';
- /*
- LIMIT '. $paging_data['loop_start'].','.($paging_data['loop_limit']-$paging_data['loop_start']).'
- */
- //check_response( $total_result);
-//check_response($paging_data);
-//check_response($selectsql);
-
-   $result=$GLOBALS['Var_DBMysqli']->query($selectsql);;
-
-    return array(
-          'paged'=>$paging_data['next_page'],
-          'pagesize'=>$args['pagesize'],
-          'result'=>$result,
-          'totalpage'=>$paging_data['total_page'],
-          'searchstr'=>$args['search_str'],
-          'selectedid'=>$args['selected_id']
-             );
-}
-/**
-* @description=> get the current member rol
-* @param  =>array('pagesize'=>$pagesize,'paged'=>$paged,'point_time'=>'','mode'=>'','checkin_id'=>$args['checkin_id'],'checkin_row'=>$args['checkin_row'],'selected_id'=>'','search_str'=>'')
-* @return => 
-*/
- public function RetriveCheckInChat($args=array()){
-     
-  if($args['mode']==1){
-  
-    $retrive_mode='a.time_node >= '.$args['point_time'];   
-   }else{
-      $retrive_mode='a.time_node <= '.time();  
-   }
+ $FROM=''.DB_NAME.'.conversation a , '.DB_NAME.'.checkins b  ';
 
 
- $numsql='SELECT COUNT(*) FROM '.DB_NAME.'.checkinmessages a
- WHERE a.checkIn_id='.$args['checkin_id'].'
- AND  a.messages_id NOT IN (SELECT b.messages_id FROM '.DB_NAME.'.checkinmessages b
-                      WHERE b.checkIn_id='.$args['checkin_id'].'
-                       AND b.receversDelete_id  LIKE "%'.$args['entity_id'].'%"
-                       )
- AND '.$retrive_mode.'
+
+
+ $numsql='SELECT COUNT(*) FROM '.$FROM.'
+ WHERE    '. $WHERE.'
+
+
 ';
 
      //-- retrive_mode
  
  
 
-$selectsql='SELECT * FROM '.DB_NAME.'.checkinmessages a
-  WHERE a.checkIn_id='.$args['checkin_id'].'
- AND  a.messages_id NOT IN (SELECT b.messages_id FROM '.DB_NAME.'.checkinmessages b
-                      WHERE b.checkIn_id='.$args['checkin_id'].'
-                       AND b.receversDelete_id  LIKE "%'.$args['entity_id'].'%"
-                       )
- AND '.$retrive_mode.'
-         ORDER BY a.time_gmt DESC            
+$selectsql='SELECT * FROM '.$FROM.'
+ WHERE  '. $WHERE.'
+ORDER BY a.lastactivity_time DESC          
                        ' ;
 
 
@@ -533,19 +600,23 @@ $paging_data=paging_data($total_result,$args['pagesize'],$args['paged']);
 //check_response($numsql);
 
    $result=$GLOBALS['Var_DBMysqli']->query($selectsql);;
- 
-       //UpdateLastchatcheckTime($args['checkin_row'])
-       $this->UpdateLastchatcheckTime($args['checkin_row']);
-  
-    return array(
+
+
+
+
+        return PagingOutPut(array(
           'paged'=>$paging_data['next_page'],
           'pagesize'=>$args['pagesize'],
-          'result'=> array_reverse($result),
+          'result'=>$result,
           'totalpage'=>$paging_data['total_page'],
+          'totalresult'=>$total_result,
           'searchstr'=>$args['search_str'],
-          'selectedid'=>$args['selected_id']
-             );
- }
+          'selectedid'=>$args['selected_id'] 
+             ));
+}
+
+
+
 
 /*------===Parse===------*/
 
@@ -559,7 +630,7 @@ public function ParseCheckInChat($Fields,$args=array()){
      $members=$this->GetCheckInMember($args['checkIn_row']);
    for($i=0,$j=0;$j<count($Fields);$j++){
   $row_type=0; 
-   $message_date=date("d-M-Y h A",strtotime($Fields[$j]['time_gmt']));
+   $message_date=DateChatGrouping($Fields[$j]['time_gmt']);
             if( $group_date!=$message_date){
                 $row_type=1;
                 $group_date=$message_date;
@@ -569,7 +640,7 @@ public function ParseCheckInChat($Fields,$args=array()){
        
 
       $ret[$i]['type']=3;
-      $ret[$i]['message']=date("d-M-Y h:i A",strtotime($Fields[$j]['time_gmt']));;
+      $ret[$i]['message']=DateChatGrouping($Fields[$j]['time_gmt']);
       $ret[$i]['facet']=1;
       $ret[$i]['date']= $group_date;
         $i++;
@@ -581,6 +652,8 @@ public function ParseCheckInChat($Fields,$args=array()){
 $ret[$i]['mid']=$Fields[$j]['messages_id'];
 $ret[$i]['msg']=$Fields[$j]['message'];
 $ret[$i]['date']=$Fields[$j]['time_gmt'];
+$ret[$i]['dateday']=date_dayformat($Fields[$j]['time_gmt']);
+$ret[$i]['tn']=$Fields[$j]['time_node'];
 $ret[$i]['sid']=$Fields[$j]['sender_id'];
 $ret[$i]['sidr']=$this->GetSenderRole($members,$Fields[$j]['sender_id']);
 $ret[$i]['type']=($Fields[$j]['sender_id']===$args['entity_id'])?0:1;
@@ -636,39 +709,66 @@ $ret[$i]['attmt']= array('has'=>1,
 public function ParseCheckInData($Fields,$args=array()){
      $ActorEntityData=$GLOBALS['Var_ActorEntityData'];
     $parseData=$GLOBALS['Var_BundlePrototype']->DefaultValue('storebrowsingData');
+
+  
+    $NormalToArray =$GLOBALS['Var_Conversation']->ParseConversationRowToNormal($Fields);
+    $Fields['LChT']=$NormalToArray['last_check_time']; 
+    $Fields['members']=$NormalToArray['members'];   
+         
+    $parseData['id']= $Fields['checkIn_id'];          
     $parseData['checkIn_id']= $Fields['checkIn_id'];
+    $parseData['cid']= $Fields['conversation_id'];
+
+    $parseData['LChT']= $Fields['LChT'];  
+    $parseData['iuc']=$Fields['Instant_Updater_code'];
+    $parseData['iu_hash']=$Fields['Instant_Updater_hash'];  
+
     $parseData['checkInTime']= $Fields['checkInTime_gmt'];  
-   $members=$this->GetCheckInMember($Fields);
-   $AllAddress=array();
+    $parseData['min_o']= $this->Store_EntityRow['private_data']['minimum_order']; 
+    $members=$this->GetCheckInMember($Fields);
+    $Fields['members']=   $members;
+   $parseData['Edindex']= $this->GetEntityRole( $members);  
+
+   $AllAddress=array(); $AllEntityRow=array();
    for($i=0;$i<count($members);$i++){
    $EntityInformation= new EntityInformation($members[$i],$ActorEntityData['EntityData']['entity_id']);
     $EntityRow=$EntityInformation->frontuser_EntityRow;
+    $AllEntityRow[]=$EntityRow;
     $parseData['Ed'][]=$EntityInformation->EntityStripdata($EntityRow);;
     $AllAddress[]=   $GLOBALS['Var_ViewParse']->EntityAddress($EntityRow);
    }
-
-
+    
+  
     $parseData['role']=$this->GetEntityRole( $members);  
+    
+  //    $parseData['currency']='INR';
+
 
     if($parseData['role']==1){//show addresss only to main buyer
-     $parseData['addr']=  array($AllAddress[0],$AllAddress[1]);
-
-
+   
+     
+ 
      
   
    //check shipping to main user adddress
-   $mainUserLocationId=$AllAddress[1]['Home']['location_id'];
-   $CheckDelivery=  $this->CheckDelivery($mainUserLocationId,$members[0]);
-   if($CheckDelivery!=NULL){
-  $LocationSurChargeData=JsonTrueDecode($CheckDelivery['location_data'],array());
+   $storeZoneType =$AllEntityRow[0]['private_data']['shippingZonetype'];
+ if(is_numeric_index_array($AllAddress[1])){
+foreach($AllAddress[1] as $g=>$address ){
+ $AllAddress[1][$g] = $this->CalulatedShippingChargeOnAddress($AllAddress[1][$g],$members[0],$storeZoneType); 
+}
+ 
+}
+ 
 
-      $parseData['da'] =1;
-      $parseData['d_type'] =$CheckDelivery['type'];
-      $parseData['d_ch'] =$CheckDelivery['range_data'];
-     
-      $parseData['d_sch'] = $this->GetLocationSurchage($LocationSurChargeData,$mainUserLocationId);      
-      
-         }   
+
+   $parseData['addr']=  array($AllAddress[0],$AllAddress[1]);       
+
+   //buyer private data
+     $buyersPrivate_data= JsonTrueDecode($Fields['buyersPrivate_data'],array()) ; 
+
+   $buyersPrivate_data= True_array_merge( $GLOBALS['Var_BundlePrototype']->DefaultValue('checkinBuyerPrivateData'), $buyersPrivate_data);
+
+     $parseData['addr_id']=  $buyersPrivate_data['address_id']; 
    }
 
 
@@ -679,8 +779,23 @@ public function ParseCheckInData($Fields,$args=array()){
   $cartVarient_id=array();
 $cartVarient_idRaw=$Fields['cartVarient_id'];
 if($cartVarient_idRaw!=NULL){
-$parseData['cvD']=explode(",", $cartVarient_idRaw);  
-$parseData['cvPD']=JsonTrueDecode($Fields['cartVarient_data'],$parseData['cvD']);  
+$cvD_raw=explode(",", $cartVarient_idRaw);  
+$cvPD_raw=JsonTrueDecode($Fields['cartVarient_data'],$parseData['cvD']);  
+
+
+//check
+$parseData['cvPD']=$parseData['cvD']=array();
+if(is_array($cvD_raw)){
+    foreach($cvD_raw as $cvD){
+        if($cvD>0){
+          if(isset($cvPD_raw[$cvD])){
+         $parseData['cvPD'][$cvD] =$cvPD_raw[$cvD];  
+        $parseData['cvD'][] =$cvD;  
+        } 
+        }
+        
+    }
+}
 }
 //-->>
 
@@ -704,7 +819,7 @@ foreach($parseData['cvPD'] as $value ){
     $cartProdcutid[]=$value[1];
 }
 
-$Pbank = array_merge($cartProdcutid,$parseData['slPD'],$parseData['suPD']);
+$Pbank =True_array_merge($cartProdcutid,$parseData['slPD'],$parseData['suPD']);
 $parseData['Pbank']=[];
 if($args['Pbank']==1){
  /*$parseData['Pbank'] = $GLOBALS['Var_StoreDashboard']->ParseProducts($GLOBALS['Var_StoreDashboard']->RetriveById(array('table'=>'store_productsByIdArray','product_id'=>$Pbank,'entity_id'=>$this->Store_id)));*/
@@ -765,6 +880,36 @@ function GetLocationSurchage($LocationSurChargeData,$Lcoation_id){
     }
     return $surcharge;
 }
+/**
+* @description=>calculate shipping charge on address
+* @param  => 
+* @return => 
+*/
+function CalulatedShippingChargeOnAddress($address,$store_id,$storeZoneType){
+  $parseData=$GLOBALS['Var_BundlePrototype']->DefaultValue('ShippingDataforAddress');
+ 
+   $mainUserLocationId= $address['location']['id'];
+   $CheckDelivery=  $this->CheckDelivery($mainUserLocationId,$store_id,$storeZoneType);
+     // check_response( $CheckDelivery);
+   if($CheckDelivery!=NULL){
+  $LocationSurChargeData=JsonTrueDecode($CheckDelivery['location_data'],array());
+
+      $parseData['da'] =1;
+      $parseData['d_type'] =$CheckDelivery['type'];
+      $parseData['d_ch'] =$CheckDelivery['range_data'];
+      $parseData['d_des']=$CheckDelivery['description'];   
+      $parseData['d_time']=$CheckDelivery['processing_time'];   
+      $parseData['d_sch'] = $this->GetLocationSurchage($LocationSurChargeData,$mainUserLocationId);      
+      
+         }   
+
+ $parseData=True_array_merge($address,$parseData);
+ 
+       
+         return  $parseData;
+
+}
+
 
 
  }

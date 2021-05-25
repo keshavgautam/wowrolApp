@@ -19,7 +19,7 @@ var S={
                ch += W.T.C.C2_EntityCard(x[q]);  
             }
 
-
+           
          return ch;
      },
      product:function(x){

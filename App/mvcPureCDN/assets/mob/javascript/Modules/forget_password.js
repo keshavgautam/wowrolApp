@@ -9,12 +9,16 @@
 
   var Madian= function(x){
        var ch ='';
-   ch+='asds'
+   
 
 var header= W.T.Header.wellcome({});;
       var footer=W.T.Footer({});;
 
-  
+  ch+='<div  data-nodeid="walkway" class="block " style="margin-bottom: 100px;"> </div>';
+   $('[data-appview="' + W.A.page.AppId + '"]').on('pageloaded',function(){
+        // Always call inside from function 
+      W.U.forget_password.init();
+    });
       
      return  W.T.wrap(header,ch,footer);
    }

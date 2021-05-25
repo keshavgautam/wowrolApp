@@ -140,7 +140,7 @@ if(($ismaterial===FALSE)){
       $IsMaterial=FALSE;
 }
 if((SERVER_MODE!='DEVELOPMENT')){
-      $IsMaterial=FALSE;
+      //$IsMaterial=FALSE;
 }
     return $IsMaterial;
 

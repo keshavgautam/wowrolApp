@@ -1,0 +1,57 @@
+.animMov0 {-webkit-transform: scale(1.15);
+            -moz-transform: scale(1.15);
+             -o-transform: scale(1.15);
+              transform: scale(1.15);
+               transition-timing-function: ease-out; 
+               transition-duration: 500ms;
+                -webkit-transition-timing-function: ease-out; 
+                -webkit-transition-duration: 500ms;
+                 -moz-transition-timing-function: ease-out;
+                  -moz-transition-duration: 500ms;
+                   -o-transition-timing-function: ease-out;
+                    -o-transition-duration: 500ms;
+                    
+}
+.animMov1 {-webkit-transform: scale(1); 
+           -moz-transform: scale(1);
+            -o-transform: scale(1);
+             transform: scale(1);
+              transition-timing-function: ease-out;
+               transition-duration: 500ms;
+                -webkit-transition-timing-function: ease-out;
+                 -webkit-transition-duration: 500ms;
+                  -moz-transition-timing-function: ease-out;
+                   -moz-transition-duration: 500ms; 
+                   -o-transition-timing-function: ease-out;
+                    -o-transition-duration: 500ms;
+                    
+}
+
+.animScale {-webkit-transform: scale(0.9);
+             -moz-transform: scale(0.9);
+              -o-transform: scale(0.9);
+               transform: scale(0.9);
+                transition-timing-function: ease-out;
+                 transition-duration: 250ms;
+                  -webkit-transition-timing-function: ease-out;
+                   -webkit-transition-duration: 250ms;
+                   -moz-transition-timing-function: ease-out;
+                    -moz-transition-duration: 250ms;
+                     -o-transition-timing-function: ease-out;
+                      -o-transition-duration: 250ms;
+                      
+}
+.animScaleBack {-webkit-transform: scale(1);
+                 -moz-transform: scale(1);
+                  -o-transform: scale(1);
+                   transform: scale(1);
+                    transition-timing-function: ease-out; 
+                    transition-duration: 250ms;
+                     -webkit-transition-timing-function: ease-out;
+                      -webkit-transition-duration: 250ms; 
+                      -moz-transition-timing-function: ease-out;
+                       -moz-transition-duration: 250ms;
+                        -o-transition-timing-function: ease-out;
+                         -o-transition-duration: 250ms;
+                         
+}

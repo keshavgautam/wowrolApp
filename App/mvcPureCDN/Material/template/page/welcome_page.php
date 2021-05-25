@@ -3,7 +3,7 @@
 </div>
 
  <!--Median: Start-->
-<div id="median" class="block bg_13">
+<div  class="block bg_13">
 
  <!--MedianContent: Start-->
 
@@ -92,3 +92,55 @@
  <!--MedianFooter:Ends-->
            </div>
  <!--Median:Ends-->
+
+<!--Web frame-->
+<div class="block">
+    <div class="w9">
+
+
+
+</div>
+    <div class="w3">
+
+
+
+</div>
+
+</div>
+
+<div class="block">
+  <div class="w4">
+
+
+
+</div>
+  <div class="w4">
+
+
+
+</div>
+    <div class="w4">
+
+
+
+</div>
+
+</div>
+<div class="block">
+
+   
+
+<div class="block ">
+      <div class="block _bdy al-c">
+                  <div class="text fs14">
+<p >Today 0 local business are growing in the Wowrol online shopping community of 0 buyers.</p>
+             </div>  
+            </div></div> 
+
+
+
+
+</div>
+
+
+<!--Web frame-->

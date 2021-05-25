@@ -91,7 +91,19 @@ $checkinmessages=array(
 4     3                           inquiry Variant id  
 5     4                        adding the buyer friend by buyer  
 6     5                        removing the buyer friend by buyer    
-7     6                               leaving the buyer friend by self friend
+7     6                        leaving the buyer friend by self friend
+8     7                         order status update
+9     8                         opration error message
+10    9                         single image
+11    10                       secret discount coupan [ Only main buyer of checin can see ]
+12    11                       public discount coupan [All member of group can see]
+13    12                       Product share in convarstion
+14    13                       category share in convarstion
+15    14                       store share in convarstion
+16    15                       market share in convarstion
+17    16                       shortlist remove
+18    17                       suggestion remove
+19    18                       cart remove
 </pre>
 
 <pre style="color: black;"></pre>

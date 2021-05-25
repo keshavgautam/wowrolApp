@@ -15,7 +15,7 @@ class AppProtoType{
 */
 public function reslib($resId){
    $reslib=array();
-   $LastModified= (SERVER_MODE=="DEVELOPMENT")?time():'reslib[string(resId)]';
+   $LastModified= (SERVER_MODE=="DEVELOPMENT")?time():TIME_assetedit;
  
   switch($resId){
     
@@ -33,6 +33,9 @@ public function reslib($resId){
      break;
     case 'bootstrap':
       $reslib=array('resId'=>'bootstrapjs','res'=>'bootstrap','type'=>'script','AppId'=>'*','Last-Modified'=>$LastModified);
+     break;
+      case 'common':
+      $reslib=array('resId'=>'commonjs','res'=>'common','type'=>'script','AppId'=>'*','Last-Modified'=>$LastModified);
      break;
      case 'lang':
       $reslib=array('resId'=>'langjs','res'=>'lang','type'=>'script','AppId'=>'*','Last-Modified'=>$LastModified);
@@ -66,6 +69,7 @@ public function reslib($resId){
      case 'Ragister':
   $reslib=array('resId'=>'appjs','res'=>'Ragister','type'=>'script','AppId'=>'Ragister','Last-Modified'=>$LastModified);
      break;
+  
       case 'ragisterstore':
   $reslib=array('resId'=>'appjs','res'=>'ragisterstore','type'=>'script','AppId'=>'ragisterstore','Last-Modified'=>$LastModified);
      break;
@@ -75,8 +79,13 @@ public function reslib($resId){
      case 'ragisterbrand':
   $reslib=array('resId'=>'appjs','res'=>'ragisterbrand','type'=>'script','AppId'=>'ragisterbrand','Last-Modified'=>$LastModified);
      break;
-
-
+     case 'registerlocationmanager':
+  $reslib=array('resId'=>'appjs','res'=>'registerlocationmanager','type'=>'script','AppId'=>'registerlocationmanager','Last-Modified'=>$LastModified);
+     break;
+   case 'registercompany':
+  $reslib=array('resId'=>'appjs','res'=>'registercompany','type'=>'script','AppId'=>'registercompany','Last-Modified'=>$LastModified);
+     break;
+     
 
     //---==Ragister==--
       //---==HomePage==--
@@ -86,6 +95,14 @@ public function reslib($resId){
   case 'HomePageStore':
   $reslib=array('resId'=>'appjs','res'=>'HomePageStore','type'=>'script','AppId'=>'HomePageStore','Last-Modified'=> $LastModified);
      break;
+  case 'HomePageLocationManager':
+  $reslib=array('resId'=>'appjs','res'=>'HomePageLocationManager','type'=>'script','AppId'=>'HomePageLocationManager','Last-Modified'=> $LastModified);
+     break;
+     case 'HomePageCompany':
+       $reslib=array('resId'=>'appjs','res'=>'HomePageCompany','type'=>'script','AppId'=>'HomePageCompany','Last-Modified'=> $LastModified);
+
+     break;
+
       //---==ProfilePage==--
      case 'ProfilePageStore':
   $reslib=array('resId'=>'appjs','res'=>'ProfilePageStore','type'=>'script','AppId'=>'ProfilePageStore','Last-Modified'=> $LastModified);
@@ -100,8 +117,8 @@ public function reslib($resId){
    case 'productPageStore':
   $reslib=array('resId'=>'appjs','res'=>'productPageStore','type'=>'script','AppId'=>'productPageStore','Last-Modified'=> $LastModified);
      break;
-   case 'productPageStore':
-  $reslib=array('resId'=>'appjs','res'=>'productPageStore','type'=>'script','AppId'=>'productPageStore','Last-Modified'=> $LastModified);
+   case 'brandPageCompany':
+  $reslib=array('resId'=>'appjs','res'=>'brandPageCompany','type'=>'script','AppId'=>'brandPageCompany','Last-Modified'=> $LastModified);
      break;
      case 'checkins':
   $reslib=array('resId'=>'appjs','res'=>'checkins','type'=>'script','AppId'=>'checkins','Last-Modified'=> $LastModified);
@@ -109,6 +126,24 @@ public function reslib($resId){
          case 'checkin':
   $reslib=array('resId'=>'appjs','res'=>'checkin','type'=>'script','AppId'=>'checkin','Last-Modified'=> $LastModified);
      break;
+    case 'requests':
+  $reslib=array('resId'=>'appjs','res'=>'requests','type'=>'script','AppId'=>'requests','Last-Modified'=> $LastModified);
+     break;
+    case 'myorders':
+  $reslib=array('resId'=>'appjs','res'=>'myorders','type'=>'script','AppId'=>'myorders','Last-Modified'=> $LastModified);
+     break;
+
+    case 'myshops':
+  $reslib=array('resId'=>'appjs','res'=>'myshops','type'=>'script','AppId'=>'myshops','Last-Modified'=> $LastModified);
+     break;
+
+   case 'spread':
+  $reslib=array('resId'=>'appjs','res'=>'spread','type'=>'script','AppId'=>'spread','Last-Modified'=> $LastModified);
+    break;
+
+
+
+
      //---<<ProfilePageStore>>
 
  
@@ -119,6 +154,11 @@ public function reslib($resId){
 
            $reslib=array('resId'=>'enterjs','res'=>'enter','type'=>'script','AppId'=>'enter','Last-Modified'=> $LastModified);
         break;
+   case 'mobile_enter':
+
+           $reslib=array('resId'=>'mobile_enterjs','res'=>'mobile_enter','type'=>'script','AppId'=>'mobile_enter','Last-Modified'=> $LastModified);
+        break;
+
           case 'forget_password':
 
            $reslib=array('resId'=>'forget_passwordjs','res'=>'forget_password','type'=>'script','AppId'=>'forget_password','Last-Modified'=> $LastModified);
@@ -131,9 +171,19 @@ public function reslib($resId){
 
        $reslib=array('resId'=>'setting_buyerjs','res'=>'setting_buyer','type'=>'script','AppId'=>'setting_buyer','Last-Modified'=> $LastModified);
         break;
+
+
+        case 'company_settings':
+       $reslib=array('resId'=>'company_settingsjs','res'=>'company_settings','type'=>'script','AppId'=>'company_settings','Last-Modified'=> $LastModified);
+
+         break;      
          case 'dashboard_categories':
 
        $reslib=array('resId'=>'dashboard_categoriesjs','res'=>'dashboard_categories','type'=>'script','AppId'=>'dashboard_categories','Last-Modified'=> $LastModified);
+        break;
+    case 'dashboard_collections':
+
+       $reslib=array('resId'=>'dashboard_collectionsjs','res'=>'dashboard_collections','type'=>'script','AppId'=>'dashboard_collections','Last-Modified'=> $LastModified);
         break;
          case 'dashboard_products':
 
@@ -155,6 +205,22 @@ public function reslib($resId){
 
        $reslib=array('resId'=>'appjs','res'=>'dashboard_frontpage','type'=>'script','AppId'=>'dashboard_frontpage','Last-Modified'=> $LastModified);
         break;
+        case 'dashboard_reports':
+
+       $reslib=array('resId'=>'appjs','res'=>'dashboard_reports','type'=>'script','AppId'=>'dashboard_reports','Last-Modified'=> $LastModified);
+        break;
+       case 'dashboard_checkins':
+
+       $reslib=array('resId'=>'appjs','res'=>'dashboard_checkins','type'=>'script','AppId'=>'dashboard_checkins','Last-Modified'=> $LastModified);
+        break;
+ case 'dashboard_discounts':
+
+       $reslib=array('resId'=>'dashboard_discountsjs','res'=>'dashboard_discounts','type'=>'script','AppId'=>'dashboard_discounts','Last-Modified'=> $LastModified);
+        break;
+
+ case 'dashboard_advertise':
+  $reslib=array('resId'=>'appjs','res'=>'dashboard_advertise','type'=>'script','AppId'=>'dashboard_advertise','Last-Modified'=>$LastModified);
+     break;
         case 'storestaff':
 
        $reslib=array('resId'=>'appjs','res'=>'storestaff','type'=>'script','AppId'=>'storestaff','Last-Modified'=> $LastModified);
@@ -172,9 +238,9 @@ public function reslib($resId){
 
        $reslib=array('resId'=>'appjs','res'=>'notifications','type'=>'script','AppId'=>'notifications','Last-Modified'=> $LastModified);
         break;
-  case 'message':
+  case 'messages':
 
-       $reslib=array('resId'=>'appjs','res'=>'message','type'=>'script','AppId'=>'message','Last-Modified'=> $LastModified);
+       $reslib=array('resId'=>'appjs','res'=>'messages','type'=>'script','AppId'=>'messages','Last-Modified'=> $LastModified);
         break;
   case 'requests':
 
@@ -188,10 +254,51 @@ public function reslib($resId){
 
        $reslib=array('resId'=>'appjs','res'=>'mycheckins','type'=>'script','AppId'=>'mycheckins','Last-Modified'=> $LastModified);
         break; 
+   case 'market':
+
+       $reslib=array('resId'=>'appjs','res'=>'market','type'=>'script','AppId'=>'market','Last-Modified'=> $LastModified);
+        break; 
+  case 'ordertracking':
+
+       $reslib=array('resId'=>'appjs','res'=>'ordertracking','type'=>'script','AppId'=>'ordertracking','Last-Modified'=> $LastModified);
+
+        break; 
+  case 'orderdetails':
+
+       $reslib=array('resId'=>'appjs','res'=>'orderdetails','type'=>'script','AppId'=>'orderdetails','Last-Modified'=> $LastModified);
+
+        break;
+
+  case 'directory':
+
+       $reslib=array('resId'=>'appjs','res'=>'directory','type'=>'script','AppId'=>'directory','Last-Modified'=> $LastModified);
+
+        break;
+  case 'directoryxml':
+
+       $reslib=array('resId'=>'appjs','res'=>'directory','type'=>'script','AppId'=>'directory','Last-Modified'=> $LastModified);
+
+        break;
       case 'securitycheck':
 
        $reslib=array('resId'=>'appjs','res'=>'securitycheck','type'=>'script','AppId'=>'securitycheck','Last-Modified'=> $LastModified);
-        break;            
+        break;    
+        
+        case 'browsinghistory':
+    $reslib=array('resId'=>'appjs','res'=>'browsinghistory','type'=>'script','AppId'=>'browsinghistory','Last-Modified'=> $LastModified);
+        break;
+  
+  
+         case 'dashboard_companycategories':
+    $reslib=array('resId'=>'appjs','res'=>'dashboard_companycategories','type'=>'script','AppId'=>'dashboard_companycategories','Last-Modified'=> $LastModified);
+        break; 
+           case 'dashboard_companymenu':
+    $reslib=array('resId'=>'appjs','res'=>'dashboard_companymenu','type'=>'script','AppId'=>'dashboard_companymenu','Last-Modified'=> $LastModified);
+        break; 
+            break; 
+           case 'dashboard_brands':
+    $reslib=array('resId'=>'appjs','res'=>'dashboard_brands','type'=>'script','AppId'=>'dashboard_brands','Last-Modified'=> $LastModified);
+        break;             
        //---==object_type:admin_slug==--
 
    case 'profilePageBuyer':
@@ -213,6 +320,7 @@ public function reslib($resId){
 * @return => [array($AppData)]
 */
 public function DefaultAppData(){
+$ActorEntityData=$GLOBALS['Var_ActorEntityData'];
     $flaver=$GLOBALS['Var_ActorEntityData']['visit_data']['wf'];
     $AppData=array(
     'AppName'=>'',
@@ -220,22 +328,26 @@ public function DefaultAppData(){
     'AppSlug'=>Responsive_SITEURL.$_SERVER['REQUEST_URI'],
     'AppId'=>'',
     'AppMetaData'=>'',
-    'refresh'=>FALSE,
+    'AppSEOData'=>array('head'=>'','body'=>''),
+    'refresh'=>40000,
     'Junction'=>array(),//hold node callback function 
     'AppTitle'=>'Wowrol',
-    'AppView'=>array('theme'=>$GLOBALS['Var_ActorEntityData']['EntityData']['private_data']['theme']),
+    'AppView'=>array('theme'=>$GLOBALS['Var_ActorEntityData']['EntityData']['public_data']['theme']),
     'CDNSTATIC'=>CDNSTATIC,
-    'res'=>array(array('resId'=>'maincss','res'=>'maincss','type'=>'style','name'=>Create_res_name($this->reslib('maincss')),'replace'=>'0'),
-                 array('resId'=>'vendorjs','res'=>'vendor','name'=>Create_res_name($this->reslib('vendor')),'type'=>'script','replace'=>'0'),
-                 array('resId'=>'bootstrapjs','res'=>'bootstrap','name'=>Create_res_name($this->reslib('bootstrap')),'type'=>'script','replace'=>'0'),
-              array('resId'=>'langjs','res'=>'lang','name'=>Create_res_name($this->reslib('lang'),$GLOBALS['Var_ActorEntityData']),'type'=>'script','replace'=>'0'),
-                 array('resId'=>'mainjs','res'=>'main','name'=>Create_res_name($this->reslib('main')),'type'=>'script','replace'=>'0')
+    'res'=>array(array('resId'=>'maincss','res'=>'maincss','type'=>'style','name'=>GetResName($this->reslib('maincss'),$ActorEntityData),'replace'=>'0','path'=>GetResPath($this->reslib('maincss'), $ActorEntityData)),
+     array('resId'=>'vendorjs','res'=>'vendor','name'=>GetResName($this->reslib('vendor'),$ActorEntityData),'type'=>'script','replace'=>'0','path'=>GetResPath($this->reslib('vendor'), $ActorEntityData)),
+               array('resId'=>'bootstrapjs','res'=>'bootstrap','name'=>GetResName($this->reslib('bootstrap'),$ActorEntityData),'type'=>'script','replace'=>'0','path'=>GetResPath($this->reslib('bootstrap'), $ActorEntityData)),
+              array('resId'=>'langjs','res'=>'lang','name'=>GetResName($this->reslib('lang'),$ActorEntityData),'type'=>'script','replace'=>'0','path'=>GetResPath($this->reslib('lang'), $ActorEntityData)),
+             /*    array('resId'=>'mainjs','res'=>'main','name'=>GetResName($this->reslib('main'),$ActorEntityData),'type'=>'script','replace'=>'0','path'=>GetResPath($this->reslib('main'), $ActorEntityData)),*/
+     array('resId'=>'commonjs','res'=>'common','name'=>GetResName($this->reslib('common'),$ActorEntityData),'type'=>'script','replace'=>'0','path'=>GetResPath($this->reslib('common'), $ActorEntityData))
                 
                 ),  
-    'IsPage'=>FALSE
+    'IsPage'=>FALSE,
+    'IsstaticHtml'=>FALSE,
+    'IsstaticXML'=>FALSE
     );
    
-      
+    
 
 
 return $AppData;
@@ -272,8 +384,12 @@ if(IsMaterial()){
             case 1://
             $AppId="HomePageStore"; 
             break;
-
-
+           case 3://
+            $AppId="HomePageLocationManager"; 
+            break;
+           case 4://
+            $AppId="HomePageCompany"; 
+            break;
 
          }
 
@@ -307,21 +423,57 @@ if(IsMaterial()){
 case 'store':
 $AppId='ProfilePageStore';
 
+  $AppId = ($GLOBALS['Var_LoginStatus']) ?  $AppId: $AppId ;
+
 break;
 case 'category':
 $AppId='categoryPageStore';
+    $AppId = ($GLOBALS['Var_LoginStatus']) ?  $AppId: $AppId ;
 
 break;
 case 'product':
 $AppId='productPageStore';
+   $AppId = ($GLOBALS['Var_LoginStatus']) ?  $AppId: $AppId ;
 
 break;
-case 'checkins':
-	
-  $AppId = ($GLOBALS['Var_LoginStatus']) ? 'checkins' : 'Error';
+case 'brand':
+$AppId='brandPageCompany';
+   $AppId = ($GLOBALS['Var_LoginStatus']) ?  $AppId: $AppId ;
+
+break;   
+case 'orderdetails':
+$order_row=$GLOBALS['Var_Slug_information']['objectInfo'];
+
+if(in_array($ActorEntityData['EntityData']['entity_id'], array($order_row['buyer_entity_id'],$order_row['store_entity_id']))){
+ switch ($GLOBALS['Var_Slug_information']['data']['object_id']) {
+  case 'orderdetails':
+	$AppId = ($GLOBALS['Var_LoginStatus']) ? 'orderdetails' : 'Error';
+   $AppId = ($GLOBALS['Var_IsEntitySelected']) ?  $AppId:'Ragister' ;
+	break;
+case 'ordertracking':
+ $AppId = ($GLOBALS['Var_LoginStatus']) ? 'ordertracking' : 'Error';
+   $AppId = ($GLOBALS['Var_IsEntitySelected']) ?  $AppId:'Ragister' ;
+ 
+	break;   
+
+ }
+ }else{
+     $AppId =  'Error';
+ }
+break;
+case 'spread':
+	switch ($GLOBALS['Var_Slug_information']['data']['object_id']) {
+	   case 'spread':
+     	$AppId = ($GLOBALS['Var_LoginStatus']) ? 'spread' : 'Error';  
+       break; 
+
+
+	}
 break;
 //---==object_type:buyer==--
 case 'buyer':
+
+
 $AppId='ProfilePageBuyer';
 
 break;
@@ -332,78 +484,215 @@ break;
 case 'enter':
 	$AppId = ($GLOBALS['Var_LoginStatus']) ? 'Error' : 'enter';
 	break;
+case 'mobile_enter':
+	$AppId = ($GLOBALS['Var_LoginStatus']) ? 'Error' : 'mobile_enter';
+	break;
 case 'forget_password':
 	$AppId = ($GLOBALS['Var_LoginStatus']) ? 'Error' : 'forget_password';
  
 	break;
 case 'ragister':
-	$AppId = 'Ragister';
+
+   $AppId = ($GLOBALS['Var_LoginStatus']) ?  'Ragister':'Error' ;
 	break;
 case 'ragisterstore':
-	$AppId = 'ragisterstore';
+
+
+     $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'ragisterstore':'ragisterstore' : 'Error'; 
 	break;
 case 'ragisterbuyer':
-	$AppId = 'ragisterbuyer';
+
+
+
+   $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'ragisterbuyer':'ragisterbuyer' : 'Error';
+	break;
+case 'registerlocationmanager':
+
+
+
+   $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'registerlocationmanager':'registerlocationmanager' : 'Error';
+
+
+	break;
+    case 'registercompany':
+
+
+
+   $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'registercompany':'registercompany' : 'Error';
+
+
 	break;
 
 case 'store_settings':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? 'store_settings' : 'Error';
+
+
+
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'store_settings':'Ragister' : 'Error';
 	break;
 
 case 'setting_buyer':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? 'setting_buyer' : 'Error';
+
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? ($GLOBALS['Var_IsEntitySelected']) ?  'setting_buyer':'Ragister' : 'Error';
+
 	break;
 
+case 'company_settings':
+
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==4) ? ($GLOBALS['Var_IsEntitySelected']) ?  'company_settings':'Ragister' : 'Error';
+
+	break;
 case 'dashboard_categories':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? 'dashboard_categories' : 'Error';
+	
+
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_categories':'Ragister' : 'Error';
+
+	break;
+case 'dashboard_collections':
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_collections':'Ragister' : 'Error';
+
+
+	break;
+case 'dashboard_products':
+
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_products':'Ragister' : 'Error';
+
 	break;
 
-case 'dashboard_products':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? 'dashboard_products' : 'Error';
-	break;
 
 case 'dashboard_frontpage':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? 'dashboard_frontpage' : 'Error';
+	
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_frontpage':'Ragister' : 'Error';
+
+
 	break;
 
 case 'dashboard_menu':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? 'dashboard_menu' : 'Error';
+	
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_menu':'Ragister' : 'Error';
+
 	break;
 
 case 'dashboard_orders':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? 'dashboard_orders' : 'Error';
+	
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_orders':'Ragister' : 'Error';
+
 	break;
 
 case 'dashboard_shipping':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? 'dashboard_shipping' : 'Error';
+
+
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_shipping':'Ragister' : 'Error';
+
 	break;
+case 'dashboard_checkins':
+	
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_checkins':'Ragister' : 'Error';
+
+
+	break;
+case 'dashboard_discounts':
+
+
+  
+ $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_discounts':'Ragister' : 'Error';
+
+	break;
+case 'dashboard_reports':
+
+
+  $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_reports':'Ragister' : 'Error';
+
+	break;
+case 'dashboard_advertise':
+
+
+  $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_advertise':'Ragister' : 'Error';
+
+	break;
+
+    
 case 'storestaff':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? 'storestaff' : 'Error';
+
+     $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==1) ? ($GLOBALS['Var_IsEntitySelected']) ?  'storestaff':'Ragister' : 'Error';
+
 	break;
 case 'viewcarts':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? 'viewcarts' : 'Error';
+	
+  $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? ($GLOBALS['Var_IsEntitySelected']) ?  'viewcarts':'Ragister' : 'Error';
+
 	break;
 
 case 'vieworders':
-	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? 'vieworders' : 'Error';
+
+   $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? ($GLOBALS['Var_IsEntitySelected']) ?  'vieworders':'Ragister' : 'Error';
 	break;
 case 'notifications':
 	
-   $AppId = ($GLOBALS['Var_LoginStatus']) ? 'notifications' : 'Error';
+ 
+  $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'notifications':'Ragister' : 'Error';
 	break;
-case 'message':
-	
-   $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? 'message' : 'Error';
+case 'messages':
+	  $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'messages':'Ragister' : 'Error';
+
 	break;
     case 'requests':
 	
-   $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? 'requests' : 'Error';
-	break;
-      case 'storestafflogin':
-	
-   $AppId = 'storestafflogin';
-	break;
  
+  $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? ($GLOBALS['Var_IsEntitySelected']) ?  'requests':'Ragister' : 'Error';
+	break;
+  case 'myorders':
+	$AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? ($GLOBALS['Var_IsEntitySelected']) ?  'myorders':'Ragister' : 'Error';
+	break;
+
+    case 'myshops':
+
+   $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==0) ? ($GLOBALS['Var_IsEntitySelected']) ?  'myshops':'Ragister' : 'Error';
+
+    break ;
+
+
+
+   case 'checkins':
+   $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'checkins':'Ragister' : 'Error';
+
+	break;
+  case 'market':
+	
+  
+
+  $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'market':'Ragister' : 'market';
+	break;
+  case 'browsinghistory':
+	
+  
+
+  $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'browsinghistory':'Ragister' : 'browsinghistory';
+	break;
+   case 'storestafflogin':
+	  $AppId = ($GLOBALS['Var_LoginStatus']) ? ($GLOBALS['Var_IsEntitySelected']) ?  'storestafflogin':'Ragister' : 'storestafflogin';
+
+	break;
+
+
+ case 'dashboard_companycategories':
+   $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==4) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_companycategories':'Ragister' : 'Error';
+ break;
+ 
+ case 'dashboard_companymenu':
+   $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==4) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_companymenu':'Ragister' : 'Error';
+ break;
+
+ case 'dashboard_brands':
+   $AppId = ($GLOBALS['Var_LoginStatus']&&$ActorEntityData['EntityData']['type']==4) ? ($GLOBALS['Var_IsEntitySelected']) ?  'dashboard_brands':'Ragister' : 'Error';
+ break;
 
 
 case 'material':
@@ -416,10 +705,17 @@ case 'material':
    case 'mycheckins':
 	$AppId = 'mycheckins';
 	break;
-     case 'securitycheck':
+   case 'securitycheck':
 	$AppId = 'securitycheck';
 	break;
-
+   
+     case 'directory':
+	$AppId = 'directory';
+	break;
+    case 'directoryxml':
+	$AppId = 'directoryxml';
+	break;
+   
 
 } //Child switch
 
@@ -460,32 +756,39 @@ return $AppData;
 public function AppDataById($AppId){
     $AppData=$this->DefaultAppData();
     $ActorEntityData= $GLOBALS['Var_ActorEntityData'];
-    $Flaver=$GLOBALS['Var_ActorEntityData']['visit_data']['wf'];
+    $Flaver=$ActorEntityData['visit_data']['wf'];
+    $Entity_Type=intval($ActorEntityData['EntityData']['type']);
+
     $AppData['AppId']=$AppId;
-    $AppData['resurl']=Create_res_path($Flaver);
+    $AppData['resurl']=GetResUrl();
     switch( $AppData['AppId']){
        case 'Error':
         $AppData['AppId']='Error';
           $AppData['AppTitle']='Not Found';
-           array_push( $AppData['res'], array('resId'=>'appjs','res'=>'Error','name'=>Create_res_name($this->reslib('Error')),'type'=>'script','replace'=>'1'));
+           array_push( $AppData['res'], array('resId'=>'appjs','res'=>'Error','name'=>GetResName($this->reslib('Error'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
         break;
         case 'TestPage':
         $AppData['AppId']='TestPage';
-           array_push( $AppData['res'], array('resId'=>'appjs','res'=>'TestPage','name'=>Create_res_name($this->reslib('TestPage')),'type'=>'script','replace'=>'1'));
+           array_push( $AppData['res'], array('resId'=>'appjs','res'=>'TestPage','name'=>GetResName($this->reslib('TestPage'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
         break;
      //--------
          case 'Welcomepage':
+    $AppView=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
         $AppData['AppId']='Welcomepage';
-           array_push( $AppData['res'], array('resId'=>'appjs','res'=>'Welcomepage','name'=>Create_res_name($this->reslib('Welcomepage')),'type'=>'script','replace'=>'1'));
+          $AppData['AppView']=$AppView;
+             $AppData['AppMetaData']=$GLOBALS['Var_ViewParse']->CreateMetaData('Signup',$ActorEntityData['EntityData'],'signup')['tag'];
+         $AppData['AppSEOData']=$AppData['AppView']['SEOData'];  
+           array_push( $AppData['res'], array('resId'=>'appjs','res'=>'Welcomepage','name'=>GetResName($this->reslib('Welcomepage'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Welcomepage'), $ActorEntityData)));
         break;
      //--------
      //--------
          case 'VerifyAccount':
         $AppData['AppId']='VerifyAccount';
-        $AppData['AppView']=array('identity'=>$ActorEntityData['LoginData']['login_identity'],
+     
+$AppData['AppView']=True_array_merge( $AppData['AppView'],array('identity'=>$ActorEntityData['LoginData']['login_identity'],
                                   'identity_type'=>$ActorEntityData['LoginData']['identity_type']
-                                     );
-       array_push( $AppData['res'], array('resId'=>'appjs','res'=>'VerifyAccount','name'=>Create_res_name($this->reslib('VerifyAccount')),'type'=>'script','replace'=>'1'));
+                                     ));
+       array_push( $AppData['res'], array('resId'=>'appjs','res'=>'VerifyAccount','name'=>GetResName($this->reslib('VerifyAccount'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('VerifyAccount'), $ActorEntityData)));
         break;
      //--------
       //--------
@@ -493,20 +796,33 @@ public function AppDataById($AppId){
         $AppData['AppId']='Ragister';
       $AppData['AppTitle']='Ragister at wowrol';
    $AppData['AppView']['AccountEnetityData']=$GLOBALS['Var_Views']->EntityInfo('AccountEnetityData',$GLOBALS['Var_Utility']->AccountEnetityData());
-array_push( $AppData['res'], array('resId'=>'appjs','res'=>'Ragister','name'=>Create_res_name($this->reslib('Ragister')),'type'=>'script','replace'=>'1'));
+array_push( $AppData['res'], array('resId'=>'appjs','res'=>'Ragister','name'=>GetResName($this->reslib('Ragister'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Ragister'), $ActorEntityData)));
         break;
             case 'ragisterbuyer':
         $AppData['AppId']='ragisterbuyer';
      $AppData['AppTitle']='Ragister as Buyer';
- 
-array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterbuyer','name'=>Create_res_name($this->reslib('ragisterbuyer')),'type'=>'script','replace'=>'1'));
+  $AppData['AppView']=$GLOBALS['Var_Views']->StaticPageView($AppData['AppId']);
+array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterbuyer','name'=>GetResName($this->reslib('ragisterbuyer'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('ragisterbuyer'), $ActorEntityData)));
         break;
         case 'ragisterstore':
         $AppData['AppId']='ragisterstore';
        $AppData['AppTitle']='Ragister as store';
   
-array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name'=>Create_res_name($this->reslib('ragisterstore')),'type'=>'script','replace'=>'1'));
+array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name'=>GetResName($this->reslib('ragisterstore'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('ragisterstore'), $ActorEntityData)));
         break;
+        case 'registerlocationmanager':
+        $AppData['AppId']='registerlocationmanager';
+       $AppData['AppTitle']='Ragister as Location Manager';
+  
+array_push( $AppData['res'], array('resId'=>'appjs','res'=>'registerlocationmanager','name'=>GetResName($this->reslib('registerlocationmanager'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('registerlocationmanager'), $ActorEntityData)));
+        break;
+    
+         case 'registercompany':
+        $AppData['AppId']='registercompany';
+       $AppData['AppTitle']='Ragister as Company';
+  
+array_push( $AppData['res'], array('resId'=>'appjs','res'=>'registercompany','name'=>GetResName($this->reslib('registercompany'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('registercompany'), $ActorEntityData)));
+        break;    
      //--------
         case 'Profilepage':
          $AppData['AppId']='Profilepage';
@@ -517,9 +833,9 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
          $AppData['AppId']='Material';
 
 
-         $AppData['AppView']=array('Component'=>GET_QueryVars('material','res_chars'),'theme'=>$ActorEntityData['EntityData']['private_data']['theme']);
+         $AppData['AppView']=array('Component'=>GET_QueryVars('material','res_chars'),'theme'=>$ActorEntityData['EntityData']['public_data']['theme']);
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'Material','name'=>Create_res_name($this->reslib('Material')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'Material','name'=>GetResName($this->reslib('Material'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Material'), $ActorEntityData)));
       
         break;
 
@@ -529,9 +845,9 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
          $AppData['AppId']='getmaterial';
 
 
-         $AppData['AppView']=array('Component'=>GET_QueryVars('getmaterial','res_chars'),'theme'=>$ActorEntityData['EntityData']['private_data']['theme']);
+         $AppData['AppView']=array('Component'=>GET_QueryVars('getmaterial','res_chars'),'theme'=>$ActorEntityData['EntityData']['public_data']['theme']);
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'getmaterial','name'=>Create_res_name($this->reslib('getmaterial')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'getmaterial','name'=>GetResName($this->reslib('getmaterial'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('getmaterial'), $ActorEntityData)));
       
         break;
 
@@ -546,22 +862,39 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
 
        //---==object_type:admin_slug==--
         case 'enter':
-
+            $AppView=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
          $AppData['AppId']='enter';
          $AppData['AppTitle']='Login | signup';
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'enter','name'=>Create_res_name($this->reslib('enter')),'type'=>'script','replace'=>'1'));
+        $AppData['AppView']=$AppView;
+         $AppData['AppMetaData']=$GLOBALS['Var_ViewParse']->CreateMetaData('Signup',$ActorEntityData['EntityData'],'signup')['tag'];
+          unset($AppData['AppView']['MetaData']);  
+          $AppData['AppSEOData']=$AppData['AppView']['SEOData']; 
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'enter','name'=>GetResName($this->reslib('enter'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('enter'), $ActorEntityData)));
         break;
+            case 'mobile_enter':
+            $AppView=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+         $AppData['AppId']='mobile_enter';
+         $AppData['AppTitle']='Login | signup';
+        $AppData['AppView']=$AppView;
+         $AppData['AppMetaData']=$GLOBALS['Var_ViewParse']->CreateMetaData('Signup',$ActorEntityData['EntityData'],'signup')['tag'];
+          unset($AppData['AppView']['MetaData']);  
+          $AppData['AppSEOData']=$AppData['AppView']['SEOData']; 
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'mobile_enter','name'=>GetResName($this->reslib('mobile_enter'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('mobile_enter'), $ActorEntityData)));
+        break;
+
            case 'forget_password':
 
          $AppData['AppId']='forget_password';
          $AppData['AppTitle']='Forget Password';
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'forget_password','name'=>Create_res_name($this->reslib('forget_password')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'forget_password','name'=>GetResName($this->reslib('forget_password'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('forget_password'), $ActorEntityData)));
         break;
              case 'securitycheck':
 
          $AppData['AppId']='securitycheck';
          $AppData['AppTitle']='Security Check';
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'securitycheck','name'=>Create_res_name($this->reslib('securitycheck')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'securitycheck','name'=>GetResName($this->reslib('securitycheck'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('securitycheck'), $ActorEntityData)));
         break;
 
 
@@ -571,7 +904,7 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
          $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'store_settings','name'=>Create_res_name($this->reslib('store_settings')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'store_settings','name'=>GetResName($this->reslib('store_settings'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('store_settings'), $ActorEntityData)));
         break;
           case 'setting_buyer':
 
@@ -579,95 +912,62 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
          $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'setting_buyer','name'=>Create_res_name($this->reslib('setting_buyer')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'setting_buyer','name'=>GetResName($this->reslib('setting_buyer'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('setting_buyer'), $ActorEntityData)));
         break;
-          case 'dashboard_categories':
 
-         $AppData['AppId']='dashboard_categories';
-         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
-         $AppData['AppTitle']='wowrol';
+          case 'company_settings':
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_categories','name'=>Create_res_name($this->reslib('dashboard_categories')),'type'=>'script','replace'=>'1'));
-        break;
-          case 'dashboard_products':
-
-         $AppData['AppId']='dashboard_products';
+         $AppData['AppId']='company_settings';
          $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_products','name'=>Create_res_name($this->reslib('dashboard_products')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'company_settings','name'=>GetResName($this->reslib('company_settings'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('company_settings'), $ActorEntityData)));
         break;
-          case 'dashboard_frontpage':
 
-         $AppData['AppId']='dashboard_frontpage';
-         $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
-         $AppData['AppTitle']='wowrol';
-
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_frontpage','name'=>Create_res_name($this->reslib('dashboard_frontpage')),'type'=>'script','replace'=>'1'));
-        break;
-          case 'dashboard_menu':
-
-         $AppData['AppId']='dashboard_menu';
-         $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
-         $AppData['AppTitle']='wowrol';
-
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_menu','name'=>Create_res_name($this->reslib('dashboard_menu')),'type'=>'script','replace'=>'1'));
-        break;
-          case 'dashboard_orders':
-
-         $AppData['AppId']='dashboard_orders';
-         $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
-         $AppData['AppTitle']='wowrol';
-
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_orders','name'=>Create_res_name($this->reslib('dashboard_orders')),'type'=>'script','replace'=>'1'));
-        break;
-          case 'dashboard_shipping':
-
-         $AppData['AppId']='dashboard_shipping';
-         $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
-         $AppData['AppTitle']='wowrol';
-
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_shipping','name'=>Create_res_name($this->reslib('dashboard_shipping')),'type'=>'script','replace'=>'1'));
-        break;
-           case 'storestaff':
-
-         $AppData['AppId']='storestaff';
-         $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
-         $AppData['AppTitle']='wowrol';
-
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'storestaff','name'=>Create_res_name($this->reslib('storestaff')),'type'=>'script','replace'=>'1'));
-        break;
+       
           case 'viewcarts':
 
          $AppData['AppId']='viewcarts';
          $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'viewcarts','name'=>Create_res_name($this->reslib('viewcarts')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'viewcarts','name'=>GetResName($this->reslib('viewcarts'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('viewcarts'), $ActorEntityData)));
         break;
-          case 'vieworders':
+          case 'myorders':
 
-         $AppData['AppId']='vieworders';
+         $AppData['AppId']='myorders';
          $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
-         $AppData['AppTitle']='wowrol';
+         $AppData['AppTitle']='My Orders | wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'vieworders','name'=>Create_res_name($this->reslib('vieworders')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'myorders','name'=>GetResName($this->reslib('myorders'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('myorders'), $ActorEntityData)));
         break;
+
+       case 'myshops':
+
+         $AppData['AppId']='myshops';
+         $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
+         $AppData['AppTitle']='My Orders | wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'myshops','name'=>GetResName($this->reslib('myshops'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('myshops'), $ActorEntityData)));
+        break;
+
+
+
        case 'notifications':
 
-         $AppData['AppId']='notifications';
+         $AppData['AppId']=( $Entity_Type==0)?'notifications':'store_notifications';
          $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'notifications','name'=>Create_res_name($this->reslib('notifications')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'notifications','name'=>GetResName($this->reslib('notifications'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('notifications'), $ActorEntityData)));
         break;
-          case 'message':
+          case 'messages':
 
-         $AppData['AppId']='message';
+         $AppData['AppId']='messages';
          $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'message','name'=>Create_res_name($this->reslib('message')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'messages','name'=>GetResName($this->reslib('messages'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('messages'), $ActorEntityData)));
         break;
           case 'requests':
 
@@ -675,7 +975,7 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
          $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'requests','name'=>Create_res_name($this->reslib('requests')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'requests','name'=>GetResName($this->reslib('requests'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('requests'), $ActorEntityData)));
         break;
            case 'storestafflogin':
 
@@ -683,7 +983,7 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
          $AppData['AppView']=array();
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'storestafflogin','name'=>Create_res_name($this->reslib('storestafflogin')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'storestafflogin','name'=>GetResName($this->reslib('storestafflogin'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('storestafflogin'), $ActorEntityData)));
         break;
       case 'mycheckins':
 
@@ -691,7 +991,206 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
          $AppData['AppView']=array();
          $AppData['AppTitle']='wowrol';
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'mycheckins','name'=>Create_res_name($this->reslib('mycheckins')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'mycheckins','name'=>GetResName($this->reslib('mycheckins'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+ case 'market':
+
+         $AppData['AppId']='market';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StaticPageView($AppData['AppId'],array('ActorEntityData'=>$ActorEntityData));
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'market','name'=>GetResName($this->reslib('market'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+ case 'browsinghistory':
+
+         $AppData['AppId']='browsinghistory';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StaticPageView($AppData['AppId'],array('ActorEntityData'=>$ActorEntityData));
+         $AppData['AppTitle']='wowrol';
+
+       array_push( $AppData['res'], array('resId'=>'appjs','res'=>'browsinghistory','name'=>GetResName($this->reslib('browsinghistory'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+  case 'ordertracking':
+
+         $AppData['AppId']='ordertracking';
+         $AppData['AppView']=$GLOBALS['Var_StoreDashboard']->ParseOrders(array($GLOBALS['Var_Slug_information']['objectInfo']),array('ActorEntityData'=>$ActorEntityData,'items'=>TRUE));
+         $AppData['AppTitle']='Order Tracking';
+               $AppData['IsstaticHtml']=TRUE;  
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ordertracking','name'=>GetResName($this->reslib('ordertracking'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+  case 'orderdetails':
+
+         $AppData['AppId']='orderdetails';
+         $AppData['AppView']=$GLOBALS['Var_StoreDashboard']->ParseOrders(array($GLOBALS['Var_Slug_information']['objectInfo']),array('ActorEntityData'=>$ActorEntityData,'items'=>TRUE));
+         $AppData['AppTitle']='Order Details';
+      $AppData['IsstaticHtml']=TRUE;     
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'orderdetails','name'=>GetResName($this->reslib('orderdetails'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+       
+  case 'spread':
+
+
+         $AppData['AppId']='spread';
+      
+       $AppData['AppView']=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+
+         $AppData['AppTitle']='Spread';
+      
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'spread','name'=>GetResName($this->reslib('spread'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+
+        break;
+    //---==object_type:admin_slug:store ddash board==--
+           case 'dashboard_categories':
+
+         $AppData['AppId']='dashboard_categories';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_categories','name'=>GetResName($this->reslib('dashboard_categories'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+        case 'dashboard_collections':
+
+         $AppData['AppId']='dashboard_collections';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_collections','name'=>GetResName($this->reslib('dashboard_collections'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+
+          case 'dashboard_products':
+
+         $AppData['AppId']='dashboard_products';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_products','name'=>GetResName($this->reslib('dashboard_products'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+          case 'dashboard_frontpage':
+
+         $AppData['AppId']='dashboard_frontpage';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_frontpage','name'=>GetResName($this->reslib('dashboard_frontpage'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+
+       case 'dashboard_reports':
+
+         $AppData['AppId']='dashboard_reports';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='Reports | wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_reports','name'=>GetResName($this->reslib('dashboard_reports'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+
+          case 'dashboard_menu':
+
+         $AppData['AppId']='dashboard_menu';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+      array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_menu','name'=>GetResName($this->reslib('dashboard_menu'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+          case 'dashboard_orders':
+
+         $AppData['AppId']='dashboard_orders';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_orders','name'=>GetResName($this->reslib('dashboard_orders'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+          case 'dashboard_shipping':
+
+         $AppData['AppId']='dashboard_shipping';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_shipping','name'=>GetResName($this->reslib('dashboard_shipping'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+             case 'dashboard_checkins':
+
+         $AppData['AppId']='dashboard_checkins';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_checkins','name'=>GetResName($this->reslib('dashboard_checkins'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+
+        break;
+       case 'dashboard_discounts':
+
+         $AppData['AppId']='dashboard_discounts';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_discounts','name'=>GetResName($this->reslib('dashboard_discounts'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+
+        break;
+
+         case 'dashboard_advertise':
+
+         $AppData['AppId']='dashboard_advertise';
+         $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_advertise','name'=>GetResName($this->reslib('dashboard_advertise'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+
+        break;
+       
+           case 'storestaff':
+
+         $AppData['AppId']='storestaff';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'storestaff','name'=>GetResName($this->reslib('storestaff'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+
+
+
+
+       case 'dashboard_companycategories':
+
+         $AppData['AppId']='dashboard_companycategories';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_companycategories','name'=>GetResName($this->reslib('dashboard_companycategories'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+
+       case 'dashboard_companymenu':
+
+         $AppData['AppId']='dashboard_companymenu';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_companymenu','name'=>GetResName($this->reslib('dashboard_companymenu'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+
+       case 'dashboard_brands':
+
+         $AppData['AppId']='dashboard_brands';
+         $AppData['AppView']=$GLOBALS['Var_Views']->StoreDashboard($AppData['AppId']);
+         $AppData['AppTitle']='wowrol';
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'dashboard_brands','name'=>GetResName($this->reslib('dashboard_brands'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+
+        case 'directory':
+
+         $AppData['AppId']='directory';
+         $AppData['AppView']=  $GLOBALS['Var_Sitemap']->GetSiteMap();
+         $AppData['AppTitle']='wowrol';
+         $AppData['IsstaticHtml']=TRUE; 
+   array_push( $AppData['res'], array('resId'=>'appjs','res'=>'directory','name'=>GetResName($this->reslib('directory'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+    
+
+         case 'directoryxml':
+
+         $AppData['AppId']='directoryxml';
+         $AppData['AppView']=  $GLOBALS['Var_Sitemap']->GetSiteMap(FALSE);
+         $AppData['AppTitle']='wowrol';
+         $AppData['IsstaticXML']=TRUE; 
+   array_push( $AppData['res'], array('resId'=>'appjs','res'=>'directoryxml','name'=>GetResName($this->reslib('directoryxml'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
         break;
        //---==object_type:admin_slug==--
        
@@ -705,7 +1204,7 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
          $AppData['AppId']='HomePageBuyer';
           $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
          $AppData['AppTitle']='wowrol';
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'HomePageBuyer','name'=>Create_res_name($this->reslib('HomePageBuyer')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'HomePageBuyer','name'=>GetResName($this->reslib('HomePageBuyer'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
         break;
          case 'HomePageStore':
 
@@ -715,35 +1214,67 @@ array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ragisterstore','name
         $AppData['AppTitle']='wowrol';
 
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'HomePageStore','name'=>Create_res_name($this->reslib('HomePageStore')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'HomePageStore','name'=>GetResName($this->reslib('HomePageStore'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
         break;
+            case 'HomePageLocationManager':
+
+        $AppData['AppId']='HomePageLocationManager';
+        $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
+
+        $AppData['AppTitle']='wowrol';
+
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'HomePageLocationManager','name'=>GetResName($this->reslib('HomePageLocationManager'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+       case 'HomePageCompany':
+
+        $AppData['AppId']='HomePageCompany';
+        $AppData['AppView']=$GLOBALS['Var_Views']->HomePageView($AppData['AppId']);
+
+        $AppData['AppTitle']='wowrol';
+
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'HomePageCompany','name'=>GetResName($this->reslib('HomePageCompany'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+        break;
+
+
        //---==HomePage==--
 
       //---==ProfilePage==--
 
        case 'ProfilePageStore':
-
+   $AppView=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+         if(!$AppView['Blocked']&& !$AppView['is_disabled']){
         $AppData['AppId']='ProfilePageStore';
-        $AppData['AppView']=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+    $AppData['AppView']=$AppView;
 
    
 
    //meta tag work
   $AppData['AppTitle']=$AppData['AppView']['EntityStripdata']['entityName'].'| wowrol';
   $AppData['AppTitle']=  validate_word('strip_tags', $AppData['AppTitle']);
-  $AppData['AppMetaData']=$AppData['AppView']['MetaData']['tag'];
-  unset($AppData['AppView']['MetaData']);  
+  $AppData['AppMetaData']=$AppData['AppView']['MetaData']['tag'];  unset($AppData['AppView']['MetaData']);  
+  $AppData['AppSEOData']=$AppData['AppView']['SEOData'];
+
   //meta tag work 
 
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ProfilePageStore','name'=>Create_res_name($this->reslib('ProfilePageStore')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ProfilePageStore','name'=>GetResName($this->reslib('ProfilePageStore'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+         //--Blocking check
+
+      }else{
+           $AppData=  $this->AppDataById('Error'); 
+         }
+
+
         break;
 
 
        case 'categoryPageStore':
-
+          $AppView=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+       if(!$AppView['Blocked']&& !$AppView['is_disabled']){
         $AppData['AppId']='categoryPageStore';
-        $AppData['AppView']=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+    $AppData['AppView']=$AppView;
 
    
              //meta tag work
@@ -751,14 +1282,19 @@ $AppData['AppTitle']=$AppData['AppView']['CategoryInfo']['cN'].' | '.$AppData['A
   $AppData['AppTitle']=  validate_word('strip_tags', $AppData['AppTitle']);
   $AppData['AppMetaData']=$AppData['AppView']['MetaData']['tag'];
   unset($AppData['AppView']['MetaData']);  
+  $AppData['AppSEOData']=$AppData['AppView']['SEOData'];
   //meta tag work 
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'categoryPageStore','name'=>Create_res_name($this->reslib('categoryPageStore')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'categoryPageStore','name'=>GetResName($this->reslib('categoryPageStore'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+            }else{
+           $AppData=  $this->AppDataById('Error'); 
+         }
         break;
            case 'productPageStore':
-
+   $AppView=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+           if(!$AppView['Blocked']&& !$AppView['is_disabled']){
         $AppData['AppId']='productPageStore';
-        $AppData['AppView']=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+          $AppData['AppView']=$AppView;
      //activity
 $GLOBALS['Var_Activity']->RagisterRefActivity(array('creater_id' => $ActorEntityData['EntityData']['entity_id'],'object_id' => $AppData['AppView']['ProductInfo']['pid'],'activity_code' => '704')); 
    
@@ -766,33 +1302,61 @@ $GLOBALS['Var_Activity']->RagisterRefActivity(array('creater_id' => $ActorEntity
   $AppData['AppTitle']=$AppData['AppView']['ProductInfo']['pN'].' | '.$AppData['AppView']['EntityStripdata']['entityName'].' | wowrol';
   $AppData['AppTitle']=  validate_word('strip_tags', $AppData['AppTitle']);
   $AppData['AppMetaData']=$AppData['AppView']['MetaData']['tag'];
-  unset($AppData['AppView']['MetaData']);  
+  unset($AppData['AppView']['MetaData']); 
+   $AppData['AppSEOData']=$AppData['AppView']['SEOData'];  
   //meta tag work 
  
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'productPageStore','name'=>Create_res_name($this->reslib('productPageStore')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'productPageStore','name'=>GetResName($this->reslib('productPageStore'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+            }else{
+           $AppData=  $this->AppDataById('Error'); 
+         }
         break;
          case 'ProfilePageBuyer':
-
-        $AppData['AppId']='ProfilePageBuyer';
-        $AppData['AppView']=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+         $AppView=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+            if(!$AppView['Blocked']&& !$AppView['is_disabled']){
+           $AppData['AppId']='ProfilePageBuyer';
+        $AppData['AppView']=$AppView;
 
         $AppData['AppTitle']=$AppData['AppView']['EntityStripdata']['entityName'].' | wowrol';
 
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ProfilePageBuyer','name'=>Create_res_name($this->reslib('ProfilePageBuyer')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'ProfilePageBuyer','name'=>GetResName($this->reslib('ProfilePageBuyer'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));  
+         
+          
+         }else{
+           $AppData=  $this->AppDataById('Error'); 
+         }
+       
+
+       
+        break;
+
+        case 'brandPageCompany':
+
+        $AppData['AppId']='brandPageCompany';
+       $AppData['AppView']=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+
+        $AppData['AppTitle']='brand | wowrol';
+
+
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'brandPageCompany','name'=>GetResName($this->reslib('brandPageCompany'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
+
         break;
           case 'checkins':
 
         $AppData['AppId']='checkins';
-        $AppData['AppView']=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
+       $AppData['AppView']=$GLOBALS['Var_Views']->ProfilePageView($AppData['AppId']);
 
         $AppData['AppTitle']='checkins | wowrol';
 
 
-         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'checkins','name'=>Create_res_name($this->reslib('checkins')),'type'=>'script','replace'=>'1'));
+         array_push( $AppData['res'], array('resId'=>'appjs','res'=>'checkins','name'=>GetResName($this->reslib('checkins'), $ActorEntityData),'type'=>'script','replace'=>'1','path'=>GetResPath($this->reslib('Error'), $ActorEntityData)));
         break;
 
       //---==ProfilePage==--
+
+
+
 
     }
 
@@ -812,12 +1376,14 @@ private function GetAcessData(){
    $EntityData= $GLOBALS['Var_ActorEntityData'];
    $AcessData=array('LoginStatus'=> $EntityData['LoginStatus'],
                  'visit_data'=> $EntityData['visit_data'],
-                 'entity_id'=> $EntityData['LoginData']['entity_id']
+                 'entity_id'=> $EntityData['LoginData']['entity_id'],
+                 'entity_type'=> $EntityData['EntityData']['type']
             );
 
 
    return  $AcessData;
 }
+
 
 
 
